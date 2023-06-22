@@ -105,7 +105,6 @@ Packages
 .build/
 xcuserdata
 DerivedData/
-*.xcodeproj
 .grunt
 node_modules
 _book

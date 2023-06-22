@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A12D875B2A43AB4800A0D1A2 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = A12D875A2A43AB4800A0D1A2 /* RiveRuntime */; };
+		A12D875E2A43AB5500A0D1A2 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A12D875D2A43AB5500A0D1A2 /* KeychainSwift */; };
+		A12D87642A43ABEF00A0D1A2 /* Just in Frameworks */ = {isa = PBXBuildFile; productRef = A12D87632A43ABEF00A0D1A2 /* Just */; };
+		A12D87672A43B36800A0D1A2 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = A12D87662A43B36800A0D1A2 /* ActivityIndicatorView */; };
+		A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12D876A2A43B57C00A0D1A2 /* LoginView.swift */; };
+		A12D87742A43D99500A0D1A2 /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A12D87732A43D99500A0D1A2 /* background.mp4 */; };
+		A162F8512A427D9D0041DE2D /* MiUTEMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A162F8502A427D9D0041DE2D /* MiUTEMApp.swift */; };
+		A162F8552A427D9E0041DE2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A162F8542A427D9E0041DE2D /* Assets.xcassets */; };
+		A162F8582A427D9E0041DE2D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A162F8572A427D9E0041DE2D /* Preview Assets.xcassets */; };
+		A162F8602A4280B50041DE2D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A162F85F2A4280B50041DE2D /* HomeView.swift */; };
+		A162F86B2A4290580041DE2D /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A162F86A2A4290580041DE2D /* SplashView.swift */; };
+		A1DC1B782A4334F900AFF8E1 /* utem.riv in Resources */ = {isa = PBXBuildFile; fileRef = A1DC1B772A4334F800AFF8E1 /* utem.riv */; };
+		A1DC1B7F2A435A7000AFF8E1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DC1B7E2A435A7000AFF8E1 /* User.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A12D876A2A43B57C00A0D1A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A12D87732A43D99500A0D1A2 /* background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.mp4; sourceTree = "<group>"; };
+		A162F84D2A427D9D0041DE2D /* MiUTEM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiUTEM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A162F8502A427D9D0041DE2D /* MiUTEMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiUTEMApp.swift; sourceTree = "<group>"; };
+		A162F8542A427D9E0041DE2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A162F8572A427D9E0041DE2D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A162F85F2A4280B50041DE2D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A162F86A2A4290580041DE2D /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		A1DC1B772A4334F800AFF8E1 /* utem.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = utem.riv; sourceTree = "<group>"; };
+		A1DC1B7E2A435A7000AFF8E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A162F84A2A427D9D0041DE2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A12D875E2A43AB5500A0D1A2 /* KeychainSwift in Frameworks */,
+				A12D87642A43ABEF00A0D1A2 /* Just in Frameworks */,
+				A12D87672A43B36800A0D1A2 /* ActivityIndicatorView in Frameworks */,
+				A12D875B2A43AB4800A0D1A2 /* RiveRuntime in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A12D87692A43B56F00A0D1A2 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				A12D876A2A43B57C00A0D1A2 /* LoginView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		A12D876E2A43D53900A0D1A2 /* Raw Assets */ = {
+			isa = PBXGroup;
+			children = (
+				A12D87732A43D99500A0D1A2 /* background.mp4 */,
+			);
+			path = "Raw Assets";
+			sourceTree = "<group>";
+		};
+		A162F8442A427D9C0041DE2D = {
+			isa = PBXGroup;
+			children = (
+				A162F84F2A427D9D0041DE2D /* MiUTEM */,
+				A162F84E2A427D9D0041DE2D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A162F84E2A427D9D0041DE2D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A162F84D2A427D9D0041DE2D /* MiUTEM.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A162F84F2A427D9D0041DE2D /* MiUTEM */ = {
+			isa = PBXGroup;
+			children = (
+				A12D876E2A43D53900A0D1A2 /* Raw Assets */,
+				A1DC1B7C2A435A5A00AFF8E1 /* Backend */,
+				A162F86C2A4291170041DE2D /* Rive Files */,
+				A162F85E2A4280A20041DE2D /* Views */,
+				A162F8502A427D9D0041DE2D /* MiUTEMApp.swift */,
+				A162F8542A427D9E0041DE2D /* Assets.xcassets */,
+				A162F8562A427D9E0041DE2D /* Preview Content */,
+			);
+			path = MiUTEM;
+			sourceTree = "<group>";
+		};
+		A162F8562A427D9E0041DE2D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A162F8572A427D9E0041DE2D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A162F85E2A4280A20041DE2D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A12D87692A43B56F00A0D1A2 /* Auth */,
+				A162F85F2A4280B50041DE2D /* HomeView.swift */,
+				A162F86A2A4290580041DE2D /* SplashView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A162F86C2A4291170041DE2D /* Rive Files */ = {
+			isa = PBXGroup;
+			children = (
+				A1DC1B772A4334F800AFF8E1 /* utem.riv */,
+			);
+			path = "Rive Files";
+			sourceTree = "<group>";
+		};
+		A1DC1B7C2A435A5A00AFF8E1 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				A1DC1B7D2A435A6300AFF8E1 /* Models */,
+			);
+			path = Backend;
+			sourceTree = "<group>";
+		};
+		A1DC1B7D2A435A6300AFF8E1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A1DC1B7E2A435A7000AFF8E1 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A162F84C2A427D9D0041DE2D /* MiUTEM */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A162F85B2A427D9E0041DE2D /* Build configuration list for PBXNativeTarget "MiUTEM" */;
+			buildPhases = (
+				A162F8492A427D9D0041DE2D /* Sources */,
+				A162F84A2A427D9D0041DE2D /* Frameworks */,
+				A162F84B2A427D9D0041DE2D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MiUTEM;
+			packageProductDependencies = (
+				A12D875A2A43AB4800A0D1A2 /* RiveRuntime */,
+				A12D875D2A43AB5500A0D1A2 /* KeychainSwift */,
+				A12D87632A43ABEF00A0D1A2 /* Just */,
+				A12D87662A43B36800A0D1A2 /* ActivityIndicatorView */,
+			);
+			productName = MiUTEM;
+			productReference = A162F84D2A427D9D0041DE2D /* MiUTEM.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A162F8452A427D9C0041DE2D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					A162F84C2A427D9D0041DE2D = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = A162F8482A427D9C0041DE2D /* Build configuration list for PBXProject "MiUTEM" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A162F8442A427D9C0041DE2D;
+			packageReferences = (
+				A12D87592A43AB4800A0D1A2 /* XCRemoteSwiftPackageReference "rive-ios" */,
+				A12D875C2A43AB5500A0D1A2 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				A12D87622A43ABEF00A0D1A2 /* XCRemoteSwiftPackageReference "Just" */,
+				A12D87652A43B36800A0D1A2 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+			);
+			productRefGroup = A162F84E2A427D9D0041DE2D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A162F84C2A427D9D0041DE2D /* MiUTEM */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A162F84B2A427D9D0041DE2D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A162F8582A427D9E0041DE2D /* Preview Assets.xcassets in Resources */,
+				A12D87742A43D99500A0D1A2 /* background.mp4 in Resources */,
+				A1DC1B782A4334F900AFF8E1 /* utem.riv in Resources */,
+				A162F8552A427D9E0041DE2D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A162F8492A427D9D0041DE2D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1DC1B7F2A435A7000AFF8E1 /* User.swift in Sources */,
+				A162F8602A4280B50041DE2D /* HomeView.swift in Sources */,
+				A162F86B2A4290580041DE2D /* SplashView.swift in Sources */,
+				A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */,
+				A162F8512A427D9D0041DE2D /* MiUTEMApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A162F8592A427D9E0041DE2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A162F85A2A427D9E0041DE2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A162F85C2A427D9E0041DE2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MiUTEM/Preview Content\"";
+				DEVELOPMENT_TEAM = 376N27T2BP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cl.franciscosolis.MiUTEM;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A162F85D2A427D9E0041DE2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MiUTEM/Preview Content\"";
+				DEVELOPMENT_TEAM = 376N27T2BP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cl.franciscosolis.MiUTEM;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A162F8482A427D9C0041DE2D /* Build configuration list for PBXProject "MiUTEM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A162F8592A427D9E0041DE2D /* Debug */,
+				A162F85A2A427D9E0041DE2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A162F85B2A427D9E0041DE2D /* Build configuration list for PBXNativeTarget "MiUTEM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A162F85C2A427D9E0041DE2D /* Debug */,
+				A162F85D2A427D9E0041DE2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A12D87592A43AB4800A0D1A2 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		A12D875C2A43AB5500A0D1A2 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 20.0.0;
+			};
+		};
+		A12D87622A43ABEF00A0D1A2 /* XCRemoteSwiftPackageReference "Just" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dduan/Just";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.0;
+			};
+		};
+		A12D87652A43B36800A0D1A2 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ActivityIndicatorView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A12D875A2A43AB4800A0D1A2 /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A12D87592A43AB4800A0D1A2 /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
+		};
+		A12D875D2A43AB5500A0D1A2 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A12D875C2A43AB5500A0D1A2 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		A12D87632A43ABEF00A0D1A2 /* Just */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A12D87622A43ABEF00A0D1A2 /* XCRemoteSwiftPackageReference "Just" */;
+			productName = Just;
+		};
+		A12D87662A43B36800A0D1A2 /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A12D87652A43B36800A0D1A2 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A162F8452A427D9C0041DE2D /* Project object */;
+}
