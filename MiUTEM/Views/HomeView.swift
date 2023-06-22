@@ -9,22 +9,12 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var user: User
-    @State private var isLoading: Bool = false
     
     var body: some View {
         VStack {
-            Text("Iniciar sesión").onTapGesture {
-                isLoading.toggle()
-                user.attemptLogin {
-                    isLoading.toggle()
-                }
-            }
-            
-            if(isLoading) {
-                ProgressView()
-                    .progressViewStyle(.circular)
-            } else {
-                Text(user.status ?? "Por favor inicia sesión!")
+            Text("Hello, \(user.getString(key: "nombreCompleto"))!")
+            Button("Cerrar Sesión") {
+                user.logout()
             }
         }
     }

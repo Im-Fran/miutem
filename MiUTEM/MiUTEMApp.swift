@@ -16,6 +16,12 @@ struct MiUTEMApp: App {
         WindowGroup {
             if isActive {
                 SplashView(isActive: $isActive)
+                    .onAppear {
+                        user.attemptLogin {}
+                    }
+            } else if (user.status != "ok") {
+                LoginView()
+                    .environmentObject(user)
             } else {
                 HomeView()
                     .environmentObject(user)

@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "popupview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/exyte/PopupView",
+      "state" : {
+        "revision" : "771afe0a855f72f7fdd151abb25538df1d75fbc8",
+        "version" : "2.5.3"
+      }
+    },
+    {
       "identity" : "rive-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/rive-app/rive-ios",
