@@ -49,7 +49,7 @@ struct SplashView: View {
                  .fontWeight(.semibold)
                  
          }
-         .background(LinearGradient(colors: [Color("brandGreen"), Color("brandBlue")], startPoint: .topTrailing, endPoint: .bottomLeading))
+        .background(LinearGradient(colors: [.utemVerde, .utemAzul], startPoint: .topTrailing, endPoint: .bottomLeading))
      }
 }
 

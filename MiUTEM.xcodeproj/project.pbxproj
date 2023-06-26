@@ -13,6 +13,8 @@
 		A12D87672A43B36800A0D1A2 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = A12D87662A43B36800A0D1A2 /* ActivityIndicatorView */; };
 		A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12D876A2A43B57C00A0D1A2 /* LoginView.swift */; };
 		A12D87742A43D99500A0D1A2 /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A12D87732A43D99500A0D1A2 /* background.mp4 */; };
+		A15A7C972A494299004004F5 /* PermisoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15A7C962A494299004004F5 /* PermisoPreview.swift */; };
+		A15A7C992A494444004004F5 /* Permiso.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15A7C982A494444004004F5 /* Permiso.swift */; };
 		A162F8512A427D9D0041DE2D /* MiUTEMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A162F8502A427D9D0041DE2D /* MiUTEMApp.swift */; };
 		A162F8552A427D9E0041DE2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A162F8542A427D9E0041DE2D /* Assets.xcassets */; };
 		A162F8582A427D9E0041DE2D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A162F8572A427D9E0041DE2D /* Preview Assets.xcassets */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		A12D876A2A43B57C00A0D1A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A12D87732A43D99500A0D1A2 /* background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.mp4; sourceTree = "<group>"; };
+		A15A7C962A494299004004F5 /* PermisoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermisoPreview.swift; sourceTree = "<group>"; };
+		A15A7C982A494444004004F5 /* Permiso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permiso.swift; sourceTree = "<group>"; };
 		A162F84D2A427D9D0041DE2D /* MiUTEM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiUTEM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A162F8502A427D9D0041DE2D /* MiUTEMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiUTEMApp.swift; sourceTree = "<group>"; };
 		A162F8542A427D9E0041DE2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,6 +74,23 @@
 			path = "Raw Assets";
 			sourceTree = "<group>";
 		};
+		A15A7C922A494257004004F5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A15A7C932A49427C004004F5 /* Permisos */,
+				A162F85F2A4280B50041DE2D /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		A15A7C932A49427C004004F5 /* Permisos */ = {
+			isa = PBXGroup;
+			children = (
+				A15A7C962A494299004004F5 /* PermisoPreview.swift */,
+			);
+			path = Permisos;
+			sourceTree = "<group>";
+		};
 		A162F8442A427D9C0041DE2D = {
 			isa = PBXGroup;
 			children = (
@@ -111,8 +132,8 @@
 		A162F85E2A4280A20041DE2D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A15A7C922A494257004004F5 /* Home */,
 				A12D87692A43B56F00A0D1A2 /* Auth */,
-				A162F85F2A4280B50041DE2D /* HomeView.swift */,
 				A162F86A2A4290580041DE2D /* SplashView.swift */,
 			);
 			path = Views;
@@ -139,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				A1DC1B7E2A435A7000AFF8E1 /* User.swift */,
+				A15A7C982A494444004004F5 /* Permiso.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -233,8 +255,10 @@
 				A196980C2A44A28800D58F58 /* Helpers.swift in Sources */,
 				A162F8602A4280B50041DE2D /* HomeView.swift in Sources */,
 				A162F86B2A4290580041DE2D /* SplashView.swift in Sources */,
+				A15A7C972A494299004004F5 /* PermisoPreview.swift in Sources */,
 				A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */,
 				A162F8512A427D9D0041DE2D /* MiUTEMApp.swift in Sources */,
+				A15A7C992A494444004004F5 /* Permiso.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +315,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -345,6 +370,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

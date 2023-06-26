@@ -14,31 +14,45 @@ struct Credentials {
     var password: String
 }
 
+struct Perfil: DictionaryDecodable {
+    var token: String
+    
+    var correoPersonal: String
+    var correoUtem: String
+    var username: String
+    var rut: Int
+    
+    var nombreCompleto: String
+    
+    var nombres: String
+    var primerNombre: String {
+        return nombres.components(separatedBy: " ").first?.capitalized ?? ""
+    }
+    var segundosNombres: String {
+        return nombres.components(separatedBy: " ").allFrom(index: 1).joined(separator: " ")
+    }
+    
+    var apellidos: String
+    var primerApellido: String {
+        return apellidos.components(separatedBy: " ").first?.capitalized ?? ""
+    }
+    var segundoApellido: String {
+        return apellidos.components(separatedBy: " ").allFrom(index: 1).joined(separator: " ")
+    }
+    
+    var perfiles: [String]
+}
+
 class User: ObservableObject {
     @Published var status: String? = nil
-    @Published var data: [String: Any] = [:]
+    @Published var perfil: Perfil? = nil
     let server = "https://api.exdev.cl/v1/auth"
     let keychain = KeychainSwift()
     
     init() {
         self.attemptLogin {}
     }
-    
-    func get(key: String) -> Any {
-        return self.data[key]!
-    }
-    
-    func getString(key: String) -> String {
-        return self.data[key] as? String ?? ""
-    }
-    
-    func getBool(key: String) -> Bool {
-        return self.data[key] as? Bool ?? false
-    }
-    
-    func getNumber(key: String) -> Int {
-        return self.data[key] as? Int ?? 0
-    }
+
     
     func getStoredCredentials() -> Credentials {
         let username = keychain.get("username") ?? ""
@@ -70,7 +84,11 @@ class User: ObservableObject {
                     if(response.ok) {
                         DispatchQueue.main.async {
                             if(json["correoUtem"] != nil) {
-                                self.data = json
+                                do {
+                                    self.perfil = try Perfil(dictionary: json)
+                                } catch {
+                                    self.status = "Error al decodificar datos! Intenta más tarde."
+                                }
                             }
                             self.status = "ok"
                             onFinish()
@@ -95,6 +113,6 @@ class User: ObservableObject {
         self.keychain.delete("username")
         self.keychain.delete("password")
         self.status = nil
-        self.data = [:]
+        self.perfil = nil
     }
 }
