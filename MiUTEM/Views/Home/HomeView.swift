@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var user: User
+    @EnvironmentObject var authService: AuthService
     
     private let gradient = LinearGradient(
         colors: [.utemAzul, .utemVerde],
@@ -28,7 +28,7 @@ struct HomeView: View {
                 VStack {
                     HStack {
                         VStack {
-                            Text("Tiempo sin vernos,\n\(Text("\(user.perfil?.primerNombre ?? "")").fontWeight(.semibold))")
+                            Text("Tiempo sin vernos,\n\(Text("\(authService.perfil?.primerNombre ?? "")").fontWeight(.semibold))")
                                 .foregroundColor(.black)
                                 .font(.title)
                         }.multilineTextAlignment(.leading)
@@ -76,9 +76,9 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
-    @StateObject static var user: User = User()
+    @StateObject static var authService: AuthService = AuthService()
     static var previews: some View {
         HomeView()
-            .environmentObject(user)
+            .environmentObject(authService)
     }
 }

@@ -6,7 +6,7 @@ import ActivityIndicatorView
 
 struct LoginView: View {
     
-    @EnvironmentObject var user: User
+    @EnvironmentObject var authService: AuthService
     
     @State private var username: String = ""
     @FocusState private var isUsernameFocused: Bool
@@ -85,9 +85,9 @@ struct LoginView: View {
                         }
                         
                         isShowingLoadingIndicator.toggle()
-                        user.storeCredentials(credentials: Credentials(username: self.username, password: self.password))
-                        user.attemptLogin {
-                            if(user.status != "ok") {
+                        authService.storeCredentials(credentials: Credentials(username: self.username, password: self.password))
+                        authService.attemptLogin {
+                            if(authService.status != "ok") {
                                 isShowingStatusToast.toggle()
                             }
                             isShowingLoadingIndicator.toggle()
@@ -114,7 +114,7 @@ struct LoginView: View {
             }
             .popup(isPresented: $isShowingStatusToast) {
                 VStack {
-                    Text("\(Text("Error").font(.title3).fontWeight(.bold))\n\(user.status ?? "Por favor verifica tus credenciales!")")
+                    Text("\(Text("Error").font(.title3).fontWeight(.bold))\n\(authService.status ?? "Por favor verifica tus credenciales!")")
                         .multilineTextAlignment(.leading)
                         .padding()
                 }
@@ -129,7 +129,7 @@ struct LoginView: View {
             }
         }
         .onAppear {
-            let credentials: Credentials = user.getStoredCredentials()
+            let credentials: Credentials = authService.getStoredCredentials()
             username = credentials.username
             password = credentials.password
         }
@@ -168,9 +168,9 @@ struct VideoPlayerView: View {
 }
 
 struct LoginView_Previews: PreviewProvider {
-    @StateObject static var user: User = User()
+    @StateObject static var authService: AuthService = AuthService()
     static var previews: some View {
         LoginView()
-            .environmentObject(user)
+            .environmentObject(authService)
     }
 }

@@ -24,6 +24,9 @@
 		A196980F2A44BEC200D58F58 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = A196980E2A44BEC200D58F58 /* PopupView */; };
 		A1DC1B782A4334F900AFF8E1 /* utem.riv in Resources */ = {isa = PBXBuildFile; fileRef = A1DC1B772A4334F800AFF8E1 /* utem.riv */; };
 		A1DC1B7F2A435A7000AFF8E1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DC1B7E2A435A7000AFF8E1 /* User.swift */; };
+		A1F722BE2A4A05B000E30CF9 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = A1F722BD2A4A05B000E30CF9 /* SwiftSoup */; };
+		A1F722CF2A4A41E000E30CF9 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = A1F722CE2A4A41E000E30CF9 /* Cache */; };
+		A1F722D22A4A46E000E30CF9 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F722D12A4A46E000E30CF9 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,7 @@
 		A196980B2A44A28800D58F58 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		A1DC1B772A4334F800AFF8E1 /* utem.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = utem.riv; sourceTree = "<group>"; };
 		A1DC1B7E2A435A7000AFF8E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A1F722D12A4A46E000E30CF9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,10 +52,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A12D875E2A43AB5500A0D1A2 /* KeychainSwift in Frameworks */,
+				A1F722CF2A4A41E000E30CF9 /* Cache in Frameworks */,
 				A12D87642A43ABEF00A0D1A2 /* Just in Frameworks */,
 				A196980F2A44BEC200D58F58 /* PopupView in Frameworks */,
 				A12D87672A43B36800A0D1A2 /* ActivityIndicatorView in Frameworks */,
 				A12D875B2A43AB4800A0D1A2 /* RiveRuntime in Frameworks */,
+				A1F722BE2A4A05B000E30CF9 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +156,7 @@
 		A1DC1B7C2A435A5A00AFF8E1 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				A1F722D02A4A46D600E30CF9 /* Services */,
 				A1DC1B7D2A435A6300AFF8E1 /* Models */,
 				A196980B2A44A28800D58F58 /* Helpers.swift */,
 			);
@@ -163,6 +170,14 @@
 				A15A7C982A494444004004F5 /* Permiso.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A1F722D02A4A46D600E30CF9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A1F722D12A4A46E000E30CF9 /* AuthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +202,8 @@
 				A12D87632A43ABEF00A0D1A2 /* Just */,
 				A12D87662A43B36800A0D1A2 /* ActivityIndicatorView */,
 				A196980E2A44BEC200D58F58 /* PopupView */,
+				A1F722BD2A4A05B000E30CF9 /* SwiftSoup */,
+				A1F722CE2A4A41E000E30CF9 /* Cache */,
 			);
 			productName = MiUTEM;
 			productReference = A162F84D2A427D9D0041DE2D /* MiUTEM.app */;
@@ -222,6 +239,8 @@
 				A12D87622A43ABEF00A0D1A2 /* XCRemoteSwiftPackageReference "Just" */,
 				A12D87652A43B36800A0D1A2 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				A196980D2A44BEC200D58F58 /* XCRemoteSwiftPackageReference "PopupView" */,
+				A1F722BC2A4A05B000E30CF9 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				A1F722CD2A4A41E000E30CF9 /* XCRemoteSwiftPackageReference "Cache" */,
 			);
 			productRefGroup = A162F84E2A427D9D0041DE2D /* Products */;
 			projectDirPath = "";
@@ -254,6 +273,7 @@
 				A1DC1B7F2A435A7000AFF8E1 /* User.swift in Sources */,
 				A196980C2A44A28800D58F58 /* Helpers.swift in Sources */,
 				A162F8602A4280B50041DE2D /* HomeView.swift in Sources */,
+				A1F722D22A4A46E000E30CF9 /* AuthService.swift in Sources */,
 				A162F86B2A4290580041DE2D /* SplashView.swift in Sources */,
 				A15A7C972A494299004004F5 /* PermisoPreview.swift in Sources */,
 				A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */,
@@ -505,6 +525,22 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		A1F722BC2A4A05B000E30CF9 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		A1F722CD2A4A41E000E30CF9 /* XCRemoteSwiftPackageReference "Cache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hyperoslo/Cache";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -532,6 +568,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A196980D2A44BEC200D58F58 /* XCRemoteSwiftPackageReference "PopupView" */;
 			productName = PopupView;
+		};
+		A1F722BD2A4A05B000E30CF9 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1F722BC2A4A05B000E30CF9 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		A1F722CE2A4A41E000E30CF9 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1F722CD2A4A41E000E30CF9 /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

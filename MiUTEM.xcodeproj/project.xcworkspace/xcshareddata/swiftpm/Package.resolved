@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "cache",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hyperoslo/Cache",
+      "state" : {
+        "revision" : "c7f4d633049c3bd649a353bad36f6c17e9df085f",
+        "version" : "6.0.0"
+      }
+    },
+    {
       "identity" : "just",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dduan/Just",
@@ -43,6 +52,15 @@
       "state" : {
         "revision" : "8c8d2b2081db05d7cfc04e04e9bfd44a756326fa",
         "version" : "4.0.3"
+      }
+    },
+    {
+      "identity" : "swiftsoup",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scinfu/SwiftSoup",
+      "state" : {
+        "revision" : "0e96a20ffd37a515c5c963952d4335c89bed50a6",
+        "version" : "2.6.0"
       }
     }
   ],
