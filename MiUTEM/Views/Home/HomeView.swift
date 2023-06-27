@@ -10,18 +10,12 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var authService: AuthService
     
-    private let gradient = LinearGradient(
-        colors: [.utemAzul, .utemVerde],
-        startPoint: .bottomLeading,
-        endPoint: .topTrailing
-    )
-    
     var body: some View {
         NavigationView {
             ZStack {
                 Rectangle()
-                    .fill(gradient)
-                    .frame(width: .infinity, height: 100)
+                    .fill(LinearGradient(colors: [.utemAzul, .utemVerde], startPoint: .bottomLeading, endPoint: .topTrailing ))
+                    .frame(width: UIScreen.main.bounds.width, height: 100)
                     .ignoresSafeArea()
                     .position(x: UIScreen.main.bounds.width/2, y: 0)
                 
@@ -40,15 +34,14 @@ struct HomeView: View {
                             Text("PERMISOS ACTIVOS")
                                 .foregroundColor(.black)
                                 .fontWeight(.semibold)
+                                .onTapGesture {
+                                    authService.invalidatePermisos()
+                                    authService.loadPermisos()
+                                }
                             Spacer()
                         }
                         
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 10) {
-                                PermisoPreview()
-                            }
-                        }
-                        
+                        PermisoPreview()
                     }
                     
                     Spacer()
@@ -69,7 +62,6 @@ struct HomeView: View {
                          .fontWeight(.bold)
                          .foregroundColor(.white)
                  }
-                
             }
         }
     }

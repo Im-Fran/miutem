@@ -8,5 +8,14 @@
 import Foundation
 import Just
 
-struct Permiso {
+struct Permiso: DictionaryDecodable, Encodable {
+    var token: String
+    
+    var campus: String
+    var edificio: String
+    var fechaSolicitud: String
+    var jornada: String
+    var motivo: String
+    var tipo: String
+    var codigoQr: String
 }

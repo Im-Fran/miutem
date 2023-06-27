@@ -16,13 +16,20 @@ struct Credentials {
     var password: String
 }
 
-struct Perfil: DictionaryDecodable {
+struct Perfil: DictionaryDecodable, Encodable {
     var token: String
     
     var correoPersonal: String
     var correoUtem: String
     var username: String
     var rut: Int
+    var dv: String {
+        return "\(rut)".calcularDigitoVerificador() ?? ""
+    }
+    var rutCompleto: String {
+        let rut = "\(rut)"
+        return "\(rut.agregarPuntosDecimales() ?? "")-\(rut.calcularDigitoVerificador() ?? "")"
+    }
     
     var nombreCompleto: String
     

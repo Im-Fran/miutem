@@ -27,6 +27,9 @@
 		A1F722BE2A4A05B000E30CF9 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = A1F722BD2A4A05B000E30CF9 /* SwiftSoup */; };
 		A1F722CF2A4A41E000E30CF9 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = A1F722CE2A4A41E000E30CF9 /* Cache */; };
 		A1F722D22A4A46E000E30CF9 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F722D12A4A46E000E30CF9 /* AuthService.swift */; };
+		A1F722D52A4A548300E30CF9 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = A1F722D42A4A548300E30CF9 /* Shimmer */; };
+		A1F722D72A4A737E00E30CF9 /* PermisoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F722D62A4A737E00E30CF9 /* PermisoDetail.swift */; };
+		A1F722DD2A4A86B300E30CF9 /* QRGeneratorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F722DC2A4A86B300E30CF9 /* QRGeneratorService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		A1DC1B772A4334F800AFF8E1 /* utem.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = utem.riv; sourceTree = "<group>"; };
 		A1DC1B7E2A435A7000AFF8E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1F722D12A4A46E000E30CF9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		A1F722D62A4A737E00E30CF9 /* PermisoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermisoDetail.swift; sourceTree = "<group>"; };
+		A1F722DC2A4A86B300E30CF9 /* QRGeneratorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRGeneratorService.swift; sourceTree = "<group>"; };
+		A1F722DE2A4A9A0200E30CF9 /* MiUTEM.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiUTEM.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,7 @@
 				A1F722CF2A4A41E000E30CF9 /* Cache in Frameworks */,
 				A12D87642A43ABEF00A0D1A2 /* Just in Frameworks */,
 				A196980F2A44BEC200D58F58 /* PopupView in Frameworks */,
+				A1F722D52A4A548300E30CF9 /* Shimmer in Frameworks */,
 				A12D87672A43B36800A0D1A2 /* ActivityIndicatorView in Frameworks */,
 				A12D875B2A43AB4800A0D1A2 /* RiveRuntime in Frameworks */,
 				A1F722BE2A4A05B000E30CF9 /* SwiftSoup in Frameworks */,
@@ -93,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				A15A7C962A494299004004F5 /* PermisoPreview.swift */,
+				A1F722D62A4A737E00E30CF9 /* PermisoDetail.swift */,
 			);
 			path = Permisos;
 			sourceTree = "<group>";
@@ -116,6 +124,7 @@
 		A162F84F2A427D9D0041DE2D /* MiUTEM */ = {
 			isa = PBXGroup;
 			children = (
+				A1F722DE2A4A9A0200E30CF9 /* MiUTEM.entitlements */,
 				A12D876E2A43D53900A0D1A2 /* Raw Assets */,
 				A1DC1B7C2A435A5A00AFF8E1 /* Backend */,
 				A162F86C2A4291170041DE2D /* Rive Files */,
@@ -168,6 +177,7 @@
 			children = (
 				A1DC1B7E2A435A7000AFF8E1 /* User.swift */,
 				A15A7C982A494444004004F5 /* Permiso.swift */,
+				A1F722DC2A4A86B300E30CF9 /* QRGeneratorService.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -204,6 +214,7 @@
 				A196980E2A44BEC200D58F58 /* PopupView */,
 				A1F722BD2A4A05B000E30CF9 /* SwiftSoup */,
 				A1F722CE2A4A41E000E30CF9 /* Cache */,
+				A1F722D42A4A548300E30CF9 /* Shimmer */,
 			);
 			productName = MiUTEM;
 			productReference = A162F84D2A427D9D0041DE2D /* MiUTEM.app */;
@@ -241,6 +252,7 @@
 				A196980D2A44BEC200D58F58 /* XCRemoteSwiftPackageReference "PopupView" */,
 				A1F722BC2A4A05B000E30CF9 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				A1F722CD2A4A41E000E30CF9 /* XCRemoteSwiftPackageReference "Cache" */,
+				A1F722D32A4A548300E30CF9 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			productRefGroup = A162F84E2A427D9D0041DE2D /* Products */;
 			projectDirPath = "";
@@ -274,11 +286,13 @@
 				A196980C2A44A28800D58F58 /* Helpers.swift in Sources */,
 				A162F8602A4280B50041DE2D /* HomeView.swift in Sources */,
 				A1F722D22A4A46E000E30CF9 /* AuthService.swift in Sources */,
+				A1F722D72A4A737E00E30CF9 /* PermisoDetail.swift in Sources */,
 				A162F86B2A4290580041DE2D /* SplashView.swift in Sources */,
 				A15A7C972A494299004004F5 /* PermisoPreview.swift in Sources */,
 				A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */,
 				A162F8512A427D9D0041DE2D /* MiUTEMApp.swift in Sources */,
 				A15A7C992A494444004004F5 /* Permiso.swift in Sources */,
+				A1F722DD2A4A86B300E30CF9 /* QRGeneratorService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MiUTEM/MiUTEM.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MiUTEM/Preview Content\"";
@@ -436,6 +451,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MiUTEM/MiUTEM.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MiUTEM/Preview Content\"";
@@ -541,6 +557,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		A1F722D32A4A548300E30CF9 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -578,6 +602,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A1F722CD2A4A41E000E30CF9 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		A1F722D42A4A548300E30CF9 /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1F722D32A4A548300E30CF9 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

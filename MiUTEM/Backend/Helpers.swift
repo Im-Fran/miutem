@@ -74,3 +74,52 @@ extension DictionaryDecodable {
     }
 }
 
+extension String {
+    
+    func calcularDigitoVerificador() -> String? {
+        let rut = self
+        let rutReverso = String(rut.reversed())
+        
+        let serie = [2, 3, 4, 5, 6, 7, 2, 3, 4, 5, 6, 7] // Serie de multiplicadores
+        var suma = 0
+        
+        for (index, char) in rutReverso.enumerated() {
+            if let numero = Int(String(char)) {
+                let multiplicador = serie[index % serie.count]
+                suma += numero * multiplicador
+            } else {
+                return nil // El rut contiene caracteres no numéricos
+            }
+        }
+        
+        let resto = suma % 11
+        let digitoVerificador: String
+        
+        if resto == 0 {
+            digitoVerificador = "0"
+        } else if resto == 10 {
+            digitoVerificador = "K"
+        } else {
+            digitoVerificador = String(11 - resto)
+        }
+        
+        return digitoVerificador
+    }
+    
+    func agregarPuntosDecimales() -> String? {
+        let numero = self
+        guard let numeroInt = Int(numero) else {
+            return nil // El número no es válido
+        }
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = "."
+        
+        if let numeroFormateado = formatter.string(from: NSNumber(value: numeroInt)) {
+            return numeroFormateado
+        } else {
+            return nil // Error al formatear el número
+        }
+    }
+}
