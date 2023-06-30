@@ -18,4 +18,5 @@ struct Permiso: DictionaryDecodable, Encodable {
     var motivo: String
     var tipo: String
     var codigoQr: String
+    var vigencia: String
 }

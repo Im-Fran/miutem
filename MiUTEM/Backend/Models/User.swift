@@ -32,6 +32,11 @@ struct Perfil: DictionaryDecodable, Encodable {
     }
     
     var nombreCompleto: String
+    var iniciales: String {
+        return nombreCompleto.components(separatedBy: " ").map { it in
+            return it.first?.description ?? ""
+        }.joined(separator: "")
+    }
     
     var nombres: String
     var primerNombre: String {

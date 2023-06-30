@@ -25,7 +25,7 @@ struct PermisoPreview: View {
                                 Spacer()
                                 Image(systemName: "qrcode")
                                     .resizable()
-                                    .frame(width: 48, height: 48)
+                                    .frame(width: 54, height: 54)
                                 VStack {
                                     Text("Estudiante")
                                         .font(.body)
@@ -46,16 +46,15 @@ struct PermisoPreview: View {
                             .padding()
                             
                             Spacer()
+                            Divider()
+                            Text("Ver QR")
+                                .foregroundColor(.black)
+                                .fontWeight(.semibold)
+                                .padding(.vertical, 10)
                         }
-                        .frame(width: UIScreen.main.bounds.width * (3/4), height: 175)
+                        .frame(width: UIScreen.main.bounds.width * (3/4), height: 200)
                         .background(.white)
                         .cornerRadius(15)
-                    }.onAppear {
-                        authService.loadPermisos {
-                            if (!authService.permisos.isEmpty) {
-                                isLoading.toggle()
-                            }
-                        }
                     }
                 } else {
                     ForEach(0..<authService.permisos.count, id: \.self) { i in
@@ -96,6 +95,15 @@ struct PermisoPreview: View {
                             .cornerRadius(15)
                         }
                         .foregroundColor(.black)
+                    }
+                }
+            }.onAppear {
+                isLoading = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + ([1,1.1,1.2,1.3,1.4,1.5].randomElement() ?? 1)) {
+                    authService.loadPermisos {
+                        if (!authService.permisos.isEmpty) {
+                            isLoading.toggle()
+                        }
                     }
                 }
             }

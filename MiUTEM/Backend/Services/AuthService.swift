@@ -41,98 +41,126 @@ class AuthService: ObservableObject {
     }
     
     func invalidatePermisos() {
-        do {
-            let storage = try? Storage<String, [Permiso]>(diskConfig: DiskConfig(name: "miutem.permisos", expiry: .seconds(43200), protectionType: .complete), memoryConfig: MemoryConfig(expiry: .seconds(43200)), transformer: TransformerFactory.forCodable(ofType: [Permiso].self))
-            try storage?.removeObject(forKey: "permisos")
-        }catch{}
+        let storage = try? Storage<String, [Permiso]>(
+            diskConfig: DiskConfig(name: "miutem.permisos", expiry: .seconds(43200), protectionType: .complete),
+            memoryConfig: MemoryConfig(expiry: .seconds(43200)),
+            transformer: TransformerFactory.forCodable(ofType: [Permiso].self)
+        )
+        try? storage?.removeObject(forKey: "permisos")
+    }
+    
+    func extractLinesFromPDFData(_ pdfData: Data) -> [String] {
+        guard let pdfDocument = PDFDocument(data: pdfData) else {
+            return []
+        }
+        
+        var lines: [String] = []
+        
+        for pageIndex in 0..<pdfDocument.pageCount {
+            if let page = pdfDocument.page(at: pageIndex) {
+                if let pageText = page.string {
+                    let pageLines = pageText.components(separatedBy: .newlines)
+                    lines.append(contentsOf: pageLines)
+                }
+            }
+        }
+        
+        return lines
     }
     
     func loadPermisos(onFinish: @escaping () -> Void = {}) {
-        DispatchQueue.main.async {
-            do {
-                let storage = try? Storage<String, [Permiso]>(diskConfig: DiskConfig(name: "miutem.permisos", expiry: .seconds(43200), protectionType: .complete), memoryConfig: MemoryConfig(expiry: .seconds(43200)), transformer: TransformerFactory.forCodable(ofType: [Permiso].self))
-                try storage?.removeExpiredObjects()
-                
-                let saved = try? storage?.object(forKey: "permisos")
-                if(saved != nil) {
-                    self.permisos = saved!
-                } else {
-                    let cookies = try self.getMiUTEMCookies()
-                    if(cookies.isEmpty) {
-                        print("No cookies were found.")
-                        onFinish()
-                        return
-                    }
-                    
-                    let csrfToken = cookies["csrftoken"] ?? ""
-                    let sessionId = cookies["sessionid"] ?? ""
-                    let solicitudesResponse = Just.post("https://mi.utem.cl/solicitudes/solicitudes_ingreso", data: ["tipo_envio": "4", "csrfmiddlewaretoken": csrfToken], headers: ["Cookie": "csrftoken=\(csrfToken); sessionid=\(sessionId)"])
-                    if(!solicitudesResponse.ok) {
-                        print("Error al cargar permisos! #2")
-                        onFinish()
-                    }
-                    
-                    let json = solicitudesResponse.json as! [String: Any]
-
-                    var localPermisos: [Permiso] = []
-                    if let dataArray = json["data"] as? [[String: Any]] {
-                        for dataObject in dataArray {
-                            var data: [String: String] = [:]
-                            data["token"] = try SwiftSoup.parse((dataObject["btn_descarga"] as? String) ?? "").select("a[token]").attr("token")
-                            data["fechaSolicitud"] = (dataObject["fecha_solicitud"] as? String) ?? ""
-                            ["campus", "edificio", "jornada", "motivo", "tipo"].forEach { key in
-                                data[key] = (dataObject[key] as? String) ?? ""
-                            }
-                            
-                            // Now we look for the qr code
-                            let pdfRes = Just.post("https://mi.utem.cl/solicitudes/solicitudes_ingreso", data: ["tipo_envio": "5", "csrfmiddlewaretoken": csrfToken, "solicitud": data["token"] ?? ""], headers: ["Cookie": "csrftoken=\(csrfToken); sessionid=\(sessionId)"])
-                            if(!pdfRes.ok || pdfRes.content == nil || pdfRes.content?.count == 2) {
-                                continue
-                            }
-                            
-                            guard let pdf = PDFDocument(data: pdfRes.content!) else {
-                                continue
-                            }
-                            let lines = (pdf.string ?? "").components(separatedBy: .newlines).map { it in
-                                return it.trimmingCharacters(in: .whitespaces)
-                            }.filter { it in
-                                return !it.isEmpty
-                            }
-                            data["codigoQr"] = lines.first { it in
-                                return it.contains("\(self.perfil?.rut ?? -1)")
-                            } ?? ""
-                            let permiso = try Permiso(dictionary: data)
-                            localPermisos.append(permiso)
-                        }
-                    }
-                    
-                    if(!localPermisos.isEmpty) {
-                        try storage?.setObject(localPermisos, forKey: "permisos")
-                    }
-                    
-                    self.permisos = localPermisos
+        Task {
+            let storage = try? Storage<String, [Permiso]>(
+                diskConfig: DiskConfig(name: "miutem.permisos", expiry: .seconds(43200), protectionType: .complete),
+                memoryConfig: MemoryConfig(expiry: .seconds(43200)),
+                transformer: TransformerFactory.forCodable(ofType: [Permiso].self)
+            )
+            try? storage?.removeExpiredObjects()
+            
+            let saved = try? storage?.object(forKey: "permisos")
+            if(saved != nil && saved?.isEmpty == false) {
+                self.permisos = saved!
+            } else {
+                let cookies = (try? self.getMiUTEMCookies()) ?? [:]
+                if(cookies.isEmpty) {
+                    print("Error al cargar permisos! (Falla en autenticar)")
+                    onFinish()
+                    return
                 }
                 
-                print(self.permisos)
-                onFinish()
-            } catch {
-                print("Error al cargar los permisos! #1")
-                onFinish()
+                let csrfToken = cookies["csrftoken"] ?? ""
+                let sessionId = cookies["sessionid"] ?? ""
+                let solicitudesResponse = Just.post("https://mi.utem.cl/solicitudes/solicitudes_ingreso", data: ["tipo_envio": "4", "csrfmiddlewaretoken": csrfToken], headers: ["Cookie": "csrftoken=\(csrfToken); sessionid=\(sessionId)"])
+                if(!solicitudesResponse.ok) {
+                    print("Error al cargar permisos! (Falla al descargar)")
+                    onFinish()
+                    return
+                }
+                
+                let json = solicitudesResponse.json as! [String: Any]
+
+                var localPermisos: [Permiso] = []
+                if let dataArray = json["data"] as? [[String: Any]] {
+                    for dataObject in dataArray {
+                        var data: [String: String] = [:]
+                        data["token"] = (try? SwiftSoup.parse((dataObject["btn_descarga"] as? String) ?? "").select("a[token]").attr("token")) ?? ""
+                        if((data["token"] ?? "").isEmpty) {
+                            continue
+                        }
+                        data["fechaSolicitud"] = (dataObject["fecha_solicitud"] as? String) ?? ""
+                        ["campus", "edificio", "jornada", "motivo", "tipo"].forEach { key in
+                            data[key] = (dataObject[key] as? String) ?? ""
+                        }
+                        
+                        // Now we look for the qr code
+                        let pdfRes = Just.post("https://mi.utem.cl/solicitudes/solicitudes_ingreso", data: ["tipo_envio": "5", "csrfmiddlewaretoken": csrfToken, "solicitud": data["token"] ?? ""], headers: ["Cookie": "csrftoken=\(csrfToken); sessionid=\(sessionId)"])
+                        if(!pdfRes.ok || pdfRes.content == nil || pdfRes.content?.count == 2) {
+                            continue
+                        }
+                        
+                        guard let pdfDocument = PDFDocument(data: pdfRes.content!) else {
+                            continue
+                        }
+                        
+                        let lines = extractLinesFromPDFData(pdfRes.content!)
+                        debugPrint(data["motivo"] ?? "", pdfDocument.string ?? "")
+                        data["codigoQr"] = lines.first { it in
+                            return it.contains("\(self.perfil?.rut ?? -1)")
+                        } ?? ""
+                        let permiso = try? Permiso(dictionary: data)
+                        if(permiso != nil) {
+                            localPermisos.append(permiso!)
+                        }
+                    }
+                }
+                
+                localPermisos = localPermisos.reversed()
+                
+                if(!localPermisos.isEmpty) {
+                    try? storage?.setObject(localPermisos, forKey: "permisos")
+                }
+                
+                self.permisos = localPermisos
             }
+         
+            print(self.permisos)
+            onFinish()
         }
     }
     
     func attemptLogin(onFinish: @escaping () -> Void = {}) {
         DispatchQueue.main.async {
-            do {
-                let storage = try? Storage<String, Perfil>(diskConfig: DiskConfig(name: "miutem.perfil", expiry: .seconds(604800), protectionType: .complete), memoryConfig: MemoryConfig(expiry: .seconds(604800)), transformer: TransformerFactory.forCodable(ofType: Perfil.self))
-                try storage?.removeExpiredObjects()
-                
-                let perfil = try storage?.object(forKey: "perfil")
-                if(perfil != nil) {
-                    self.perfil = perfil!
-                }
-            } catch {}
+            let storage = try? Storage<String, Perfil>(
+                diskConfig: DiskConfig(name: "miutem.perfil", expiry: .seconds(604800), protectionType: .complete),
+                memoryConfig: MemoryConfig(expiry: .seconds(604800)),
+                transformer: TransformerFactory.forCodable(ofType: Perfil.self)
+            )
+            try? storage?.removeExpiredObjects()
+            
+            let perfil = try? storage?.object(forKey: "perfil")
+            if(perfil != nil) {
+                self.perfil = perfil!
+            }
             
             
             let username = self.keychain.get("username") ?? ""
@@ -141,17 +169,12 @@ class AuthService: ObservableObject {
                 let response = Just.post(self.server, data: ["correo": username, "contrasenia": password], headers: ["Content-Type": "application/json"])
                 let json = response.json as? [String: Any] ?? [:]
                 if(response.ok && json["correoUtem"] != nil) {
-                    do {
-                        self.perfil = try Perfil(dictionary: json)
+                    self.perfil = try? Perfil(dictionary: json)
+                    if(self.perfil != nil) {
+                        try? storage?.setObject(self.perfil!, forKey: "perfil")
                         self.status = "ok"
                         onFinish()
-                        
-                        do {
-                            let storage = try? Storage<String, Perfil>(diskConfig: DiskConfig(name: "miutem.perfil", expiry: .seconds(604800), protectionType: .complete), memoryConfig: MemoryConfig(expiry: .seconds(604800)), transformer: TransformerFactory.forCodable(ofType: Perfil.self))
-                            
-                            try storage?.setObject(self.perfil!, forKey: "perfil")
-                        } catch {}
-                    } catch {
+                    } else {
                         self.status = "Error al decodificar datos! Intenta más tarde."
                         onFinish()
                     }
@@ -160,7 +183,7 @@ class AuthService: ObservableObject {
                     onFinish()
                 }
             } else {
-                self.status = "Por favor ingresa tus credenciales!"
+                self.status = nil
                 onFinish()
             }
         }
@@ -178,23 +201,34 @@ class AuthService: ObservableObject {
         try storage?.removeExpiredObjects()
         
         var saved = try? storage?.object(forKey: "cookies")
-        let loginForm = Just.get("https://mi.utem.cl/")
-        if(loginForm.text?.contains("id=\"kc-form-login\"") == true) {
+        var loginResponse = Just.get("https://mi.utem.cl/")
+        if((loginResponse.text?.contains("id=\"kc-form-login\"") == true || (saved?["csrftoken"] ?? "none") == "none")) {
             let credentials = getStoredCredentials()
-            let loginUri = try SwiftSoup.parse(loginForm.text!).select("form[id=kc-form-login]").attr("action")
-            var cookieHeader = ""
-            loginForm.cookies.forEach { (key: String, value: HTTPCookie) in
-                cookieHeader = "\(cookieHeader)\(key)=\(value.value);"
-            }
-            
-            Just.post(loginUri, data: [ "username": credentials.username, "password": credentials.password ], headers: [ "Cookie": cookieHeader ])
-            
-            let loginResponse = Just.post(loginUri, data: [ "username": credentials.username, "password": credentials.password ], headers: [ "Cookie": cookieHeader ])
-            
-            if(loginResponse.url?.absoluteString.contains("sso.utem.cl") == false && loginResponse.url?.absoluteString.contains("session_code=") == false) {
+            if(credentials.username.isEmpty || credentials.password.isEmpty) {
+                DispatchQueue.main.async {
+                    self.status = nil
+                }
                 return [:]
             }
             
+            let initialCookies = loginResponse.headers["Set-Cookie"] ?? ""
+            let loginUri = try SwiftSoup.parse(loginResponse.text!).select("form[id=kc-form-login]").attr("action")
+            var tries = 0
+            
+            while (loginResponse.text?.contains("You are already logged in.") == false && tries < 3) {
+                loginResponse = Just.post(loginUri, data: [
+                    "username": credentials.username,
+                    "password": credentials.password
+                ], headers: [
+                    "Cookie": initialCookies,
+                ])
+                tries += 1
+            } // Triple post to make sure we have the data :D or at least until we hear a good call!
+            
+            if loginResponse.text?.contains("You are already logged in") == false {
+                return [:]
+            }
+
             var res = Just.get("https://mi.utem.cl")
             if(res.error != nil) {
                 res = Just.get(((res.error as! URLError).failingURL?.absoluteString ?? "").replacing("http://", with: "https://", maxReplacements: 1))
@@ -206,7 +240,10 @@ class AuthService: ObservableObject {
             
             let cookies = res.cookies.mapValues { cookie in
                 return cookie.value
+            }.filter { cookies in
+                ["sessionid", "csrftoken"].contains(cookies.key)
             }
+            
             if(cookies.count > 0) {
                 try storage?.setObject(cookies, forKey: "cookies")
                 saved = cookies
