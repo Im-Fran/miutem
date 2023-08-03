@@ -16,9 +16,6 @@ struct MiUTEMApp: App {
         WindowGroup {
             if isActive {
                 SplashView(isActive: $isActive)
-                    .onAppear {
-                        authService.attemptLogin {}
-                    }
             } else if (authService.status != "ok") {
                 LoginView()
                     .environmentObject(authService)

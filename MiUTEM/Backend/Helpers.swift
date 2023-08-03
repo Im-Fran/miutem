@@ -72,6 +72,15 @@ extension DictionaryDecodable {
         let data = try JSONSerialization.data(withJSONObject: dictionary, options: [])
         self = try decoder.decode(Self.self, from: data)
     }
+    
+    init(array: [[String: Any]]) throws {
+        try self.init(array: array, decoder: JSONDecoder())
+    }
+        
+    init(array: [[String: Any]], decoder: JSONDecoder) throws {
+        let data = try JSONSerialization.data(withJSONObject: array, options: [])
+        self = try decoder.decode(Self.self, from: data)
+    }
 }
 
 extension String {

@@ -57,9 +57,8 @@ struct PermisoPreview: View {
                         .cornerRadius(15)
                     }
                 } else {
-                    ForEach(0..<authService.permisos.count, id: \.self) { i in
-                        let permiso = authService.permisos[i]
-                        NavigationLink(destination: PermisoDetail(permiso: permiso)) {
+                    ForEach(authService.permisosSimples, id: \.self) { permiso in
+                        NavigationLink(destination: PermisoDetail(permisoSimple: permiso)) {
                             VStack {
                                 Spacer()
                                 HStack {
@@ -70,7 +69,7 @@ struct PermisoPreview: View {
                                             .frame(width: 54, height: 54)
                                     }
                                     VStack(alignment: .leading){
-                                        Text(permiso.tipo)
+                                        Text(permiso.perfil)
                                             .font(.body)
                                             .foregroundColor(.mediumGrey)
                                         Text(permiso.motivo)
@@ -101,7 +100,7 @@ struct PermisoPreview: View {
                 isLoading = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + ([1,1.1,1.2,1.3,1.4,1.5].randomElement() ?? 1)) {
                     authService.loadPermisos {
-                        if (!authService.permisos.isEmpty) {
+                        if (!authService.permisosSimples.isEmpty) {
                             isLoading.toggle()
                         }
                     }

@@ -16,7 +16,7 @@ struct Credentials {
     var password: String
 }
 
-struct Perfil: DictionaryDecodable, Encodable {
+struct Perfil: Codable {
     var token: String
     
     var correoPersonal: String

@@ -13,6 +13,11 @@
 		A12D87672A43B36800A0D1A2 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = A12D87662A43B36800A0D1A2 /* ActivityIndicatorView */; };
 		A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12D876A2A43B57C00A0D1A2 /* LoginView.swift */; };
 		A12D87742A43D99500A0D1A2 /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A12D87732A43D99500A0D1A2 /* background.mp4 */; };
+		A158B71A2A7B408D00748C70 /* utem.riv in Resources */ = {isa = PBXBuildFile; fileRef = A158B7192A7B408D00748C70 /* utem.riv */; };
+		A158B71C2A7B442700748C70 /* Carrera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158B71B2A7B442700748C70 /* Carrera.swift */; };
+		A158B71E2A7B473D00748C70 /* CarreraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158B71D2A7B473D00748C70 /* CarreraService.swift */; };
+		A158B7252A7B546700748C70 /* JsonService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158B7242A7B546700748C70 /* JsonService.swift */; };
+		A158B7272A7B568E00748C70 /* PermisoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158B7262A7B568E00748C70 /* PermisoService.swift */; };
 		A15A7C972A494299004004F5 /* PermisoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15A7C962A494299004004F5 /* PermisoPreview.swift */; };
 		A15A7C992A494444004004F5 /* Permiso.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15A7C982A494444004004F5 /* Permiso.swift */; };
 		A162F8512A427D9D0041DE2D /* MiUTEMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A162F8502A427D9D0041DE2D /* MiUTEMApp.swift */; };
@@ -23,7 +28,6 @@
 		A188D1082A4B23DC00A735F0 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A188D1072A4B23DC00A735F0 /* MenuView.swift */; };
 		A196980C2A44A28800D58F58 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A196980B2A44A28800D58F58 /* Helpers.swift */; };
 		A196980F2A44BEC200D58F58 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = A196980E2A44BEC200D58F58 /* PopupView */; };
-		A1DC1B782A4334F900AFF8E1 /* utem.riv in Resources */ = {isa = PBXBuildFile; fileRef = A1DC1B772A4334F800AFF8E1 /* utem.riv */; };
 		A1DC1B7F2A435A7000AFF8E1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DC1B7E2A435A7000AFF8E1 /* User.swift */; };
 		A1F722BE2A4A05B000E30CF9 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = A1F722BD2A4A05B000E30CF9 /* SwiftSoup */; };
 		A1F722CF2A4A41E000E30CF9 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = A1F722CE2A4A41E000E30CF9 /* Cache */; };
@@ -36,6 +40,11 @@
 /* Begin PBXFileReference section */
 		A12D876A2A43B57C00A0D1A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A12D87732A43D99500A0D1A2 /* background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.mp4; sourceTree = "<group>"; };
+		A158B7192A7B408D00748C70 /* utem.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = utem.riv; path = "../../../../../../Users/fran/Downloads/Rive Files/utem.riv"; sourceTree = "<group>"; };
+		A158B71B2A7B442700748C70 /* Carrera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrera.swift; sourceTree = "<group>"; };
+		A158B71D2A7B473D00748C70 /* CarreraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarreraService.swift; sourceTree = "<group>"; };
+		A158B7242A7B546700748C70 /* JsonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonService.swift; sourceTree = "<group>"; };
+		A158B7262A7B568E00748C70 /* PermisoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermisoService.swift; sourceTree = "<group>"; };
 		A15A7C962A494299004004F5 /* PermisoPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermisoPreview.swift; sourceTree = "<group>"; };
 		A15A7C982A494444004004F5 /* Permiso.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permiso.swift; sourceTree = "<group>"; };
 		A162F84D2A427D9D0041DE2D /* MiUTEM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiUTEM.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,7 +55,6 @@
 		A162F86A2A4290580041DE2D /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		A188D1072A4B23DC00A735F0 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		A196980B2A44A28800D58F58 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		A1DC1B772A4334F800AFF8E1 /* utem.riv */ = {isa = PBXFileReference; lastKnownFileType = file; path = utem.riv; sourceTree = "<group>"; };
 		A1DC1B7E2A435A7000AFF8E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1F722D12A4A46E000E30CF9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A1F722D62A4A737E00E30CF9 /* PermisoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermisoDetail.swift; sourceTree = "<group>"; };
@@ -89,6 +97,23 @@
 			path = "Raw Assets";
 			sourceTree = "<group>";
 		};
+		A158B7182A7B407500748C70 /* Rive Files */ = {
+			isa = PBXGroup;
+			children = (
+				A158B7192A7B408D00748C70 /* utem.riv */,
+			);
+			path = "Rive Files";
+			sourceTree = "<group>";
+		};
+		A158B7222A7B545300748C70 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				A158B7242A7B546700748C70 /* JsonService.swift */,
+				A1F722DC2A4A86B300E30CF9 /* QRGeneratorService.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
 		A15A7C922A494257004004F5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,10 +151,10 @@
 		A162F84F2A427D9D0041DE2D /* MiUTEM */ = {
 			isa = PBXGroup;
 			children = (
+				A158B7182A7B407500748C70 /* Rive Files */,
 				A1F722DE2A4A9A0200E30CF9 /* MiUTEM.entitlements */,
 				A12D876E2A43D53900A0D1A2 /* Raw Assets */,
 				A1DC1B7C2A435A5A00AFF8E1 /* Backend */,
-				A162F86C2A4291170041DE2D /* Rive Files */,
 				A162F85E2A4280A20041DE2D /* Views */,
 				A162F8502A427D9D0041DE2D /* MiUTEMApp.swift */,
 				A162F8542A427D9E0041DE2D /* Assets.xcassets */,
@@ -157,14 +182,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		A162F86C2A4291170041DE2D /* Rive Files */ = {
-			isa = PBXGroup;
-			children = (
-				A1DC1B772A4334F800AFF8E1 /* utem.riv */,
-			);
-			path = "Rive Files";
-			sourceTree = "<group>";
-		};
 		A188D1062A4B23D000A735F0 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,7 +205,7 @@
 			children = (
 				A1DC1B7E2A435A7000AFF8E1 /* User.swift */,
 				A15A7C982A494444004004F5 /* Permiso.swift */,
-				A1F722DC2A4A86B300E30CF9 /* QRGeneratorService.swift */,
+				A158B71B2A7B442700748C70 /* Carrera.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,7 +213,10 @@
 		A1F722D02A4A46D600E30CF9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A158B7222A7B545300748C70 /* Internal */,
 				A1F722D12A4A46E000E30CF9 /* AuthService.swift */,
+				A158B71D2A7B473D00748C70 /* CarreraService.swift */,
+				A158B7262A7B568E00748C70 /* PermisoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -281,7 +301,7 @@
 			files = (
 				A162F8582A427D9E0041DE2D /* Preview Assets.xcassets in Resources */,
 				A12D87742A43D99500A0D1A2 /* background.mp4 in Resources */,
-				A1DC1B782A4334F900AFF8E1 /* utem.riv in Resources */,
+				A158B71A2A7B408D00748C70 /* utem.riv in Resources */,
 				A162F8552A427D9E0041DE2D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,6 +318,7 @@
 				A196980C2A44A28800D58F58 /* Helpers.swift in Sources */,
 				A162F8602A4280B50041DE2D /* HomeView.swift in Sources */,
 				A1F722D22A4A46E000E30CF9 /* AuthService.swift in Sources */,
+				A158B7252A7B546700748C70 /* JsonService.swift in Sources */,
 				A1F722D72A4A737E00E30CF9 /* PermisoDetail.swift in Sources */,
 				A162F86B2A4290580041DE2D /* SplashView.swift in Sources */,
 				A15A7C972A494299004004F5 /* PermisoPreview.swift in Sources */,
@@ -305,6 +326,9 @@
 				A162F8512A427D9D0041DE2D /* MiUTEMApp.swift in Sources */,
 				A15A7C992A494444004004F5 /* Permiso.swift in Sources */,
 				A1F722DD2A4A86B300E30CF9 /* QRGeneratorService.swift in Sources */,
+				A158B71E2A7B473D00748C70 /* CarreraService.swift in Sources */,
+				A158B71C2A7B442700748C70 /* Carrera.swift in Sources */,
+				A158B7272A7B568E00748C70 /* PermisoService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,7 +542,7 @@
 			repositoryURL = "https://github.com/rive-app/rive-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
+				minimumVersion = 5.0.0;
 			};
 		};
 		A12D875C2A43AB5500A0D1A2 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {

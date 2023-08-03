@@ -8,15 +8,25 @@
 import Foundation
 import Just
 
-struct Permiso: DictionaryDecodable, Encodable {
-    var token: String
-    
-    var campus: String
-    var edificio: String
+struct Permiso: Codable {
+    var codigoValidacion: String
     var fechaSolicitud: String
-    var jornada: String
     var motivo: String
-    var tipo: String
     var codigoQr: String
+    var codigoBarra: String
+    var jornada: String
+    var perfil: String
     var vigencia: String
+    var campus: String?
+    var dependencia: String?
+}
+
+struct PermisoSimple: Codable, Hashable {
+    var id: String
+    var perfil: String
+    var motivo: String
+    var campus: String?
+    var dependencia: String?
+    var jornada: String
+    var fechaSolicitud: String
 }

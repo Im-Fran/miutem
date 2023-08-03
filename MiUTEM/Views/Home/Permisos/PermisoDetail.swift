@@ -10,7 +10,8 @@ import Shimmer
 
 struct PermisoDetail: View {
     
-    var permiso: Permiso
+    var permisoSimple: PermisoSimple
+    @State var permiso: Permiso? = nil
     @State var qrImage: UIImage? = nil
     @EnvironmentObject var authService: AuthService
     @Environment(\.presentationMode) var presentationMode
@@ -52,7 +53,7 @@ struct PermisoDetail: View {
                                     .foregroundColor(.grey)
                                     .fontWeight(.bold)
                                     .font(.callout)
-                                Text(permiso.motivo)
+                                Text(permisoSimple.motivo)
                                     .foregroundColor(.grey)
                                     .fontWeight(.light)
                                     .multilineTextAlignment(.leading)
@@ -68,7 +69,7 @@ struct PermisoDetail: View {
                                     .foregroundColor(.grey)
                                     .fontWeight(.bold)
                                     .font(.callout)
-                                Text(permiso.jornada)
+                                Text(permisoSimple.jornada)
                                     .foregroundColor(.grey)
                                     .fontWeight(.light)
                                     .multilineTextAlignment(.leading)
@@ -80,11 +81,21 @@ struct PermisoDetail: View {
                                     .foregroundColor(.grey)
                                     .fontWeight(.bold)
                                     .font(.callout)
-                                Text("Semestral")
-                                    .foregroundColor(.grey)
-                                    .fontWeight(.light)
-                                    .multilineTextAlignment(.leading)
-                                    .lineLimit(nil)
+                                if(permiso == nil) {
+                                    Text("Desconocida")
+                                        .foregroundColor(.grey)
+                                        .fontWeight(.light)
+                                        .multilineTextAlignment(.leading)
+                                        .lineLimit(nil)
+                                        .redacted(reason: .placeholder)
+                                        .shimmering()
+                                } else {
+                                    Text(permiso?.vigencia ?? "Desconocida")
+                                        .foregroundColor(.grey)
+                                        .fontWeight(.light)
+                                        .multilineTextAlignment(.leading)
+                                        .lineLimit(nil)
+                                }
                             }
                             
                             Spacer()
@@ -108,7 +119,7 @@ struct PermisoDetail: View {
                                 .padding(.vertical, 15)
                         }
                         
-                        Text("Permiso generado el \(permiso.fechaSolicitud.replacing("-", with: "/"))")
+                        Text("Permiso generado el \(permisoSimple.fechaSolicitud.replacing("-", with: "/").replacing("T00:00:00.000Z", with: ""))")
                             .foregroundColor(.grey)
                             .font(.footnote)
                             .padding(.bottom, 20.0)
@@ -148,9 +159,18 @@ struct PermisoDetail: View {
             }
         })
         .onAppear {
-            // Turn into qr
-            DispatchQueue.main.async {
-                self.qrImage = QRGeneratorService.qrCode(text: permiso.codigoQr, size: .init(width: 128, height: 128))
+            // Carga detalle del permiso
+            DispatchQueue.global(qos: .userInitiated).async {
+                let permiso = PermisoService.getDetalle(permisoSimple: permisoSimple, credentials: authService.getStoredCredentials())
+                if(permiso != nil) {
+                    let qrImage = QRGeneratorService.qrCode(text: permiso?.codigoQr ?? "", size: .init(width: 128, height: 128))
+                    if(qrImage != nil) {
+                        DispatchQueue.main.async {
+                            self.permiso = permiso
+                            self.qrImage = qrImage
+                        }
+                    }
+                }
             }
         }
     }
