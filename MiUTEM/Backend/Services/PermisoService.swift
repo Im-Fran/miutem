@@ -5,57 +5,95 @@
 //  Created by Francisco Solis Maturana on 02-08-23.
 //
 
-import Cache
 import Foundation
+import Cache
+import Combine
 import Just
 
-class PermisoService {
-    
-    private static let storageSimple = try? Storage<String, [PermisoSimple]>(
+struct PermisosService {
+    private let storageSimple = try? Storage<String, [PermisoSimple]>(
         diskConfig: DiskConfig(name: "miutem.permisos-simples", expiry: .seconds(43200), protectionType: .complete),
         memoryConfig: MemoryConfig(expiry: .seconds(43200)),
         transformer: TransformerFactory.forCodable(ofType: [PermisoSimple].self)
     )
     
-    private static let storageDetalle = try? Storage<String, Permiso>(
+    private let storageDetalle = try? Storage<String, Permiso>(
         diskConfig: DiskConfig(name: "miutem.permisos-detalle", expiry: .seconds(43200), protectionType: .complete),
         memoryConfig: MemoryConfig(expiry: .seconds(43200)),
         transformer: TransformerFactory.forCodable(ofType: Permiso.self)
     )
     
-    static func invalidatePermisos() {
-        try? storageSimple?.removeObject(forKey: "permisos")
+    func invalidateCaches() {
+        try? storageSimple?.removeAll()
+        try? storageDetalle?.removeAll()
     }
     
-    static func getPermisos(credentials: Credentials) -> [PermisoSimple] {
+    func getPermisosSimples(credentials: Credentials) -> AnyPublisher<[PermisoSimple], ServerError> {
         try? storageSimple?.removeExpiredObjects()
-        
-        var permisos: [PermisoSimple] = (try? storageSimple?.object(forKey: "permisos")) ?? []
-        if(permisos.isEmpty) {
-            let response = Just.post("https://api.exdev.cl/v1/permisos", json: ["correo": credentials.username, "contrasenia": credentials.password], headers: ["Content-Type": "application/json"])
-            if(response.ok){
-                permisos = JsonService.fromJsonArray([PermisoSimple].self, response.json!) ?? []
-                try? storageSimple?.setObject(permisos, forKey: "permisos")
-            }
+        if let permisos = try? storageSimple?.object(forKey: "permisos") {
+            return Just(permisos)
+                .setFailureType(to: ServerError.self)
+                .eraseToAnyPublisher()
         }
         
-        return permisos
-    }
-    
-    static func getDetalle(permisoSimple: PermisoSimple, credentials: Credentials) -> Permiso? {
-        try? storageDetalle?.removeExpiredObjects()
+        guard let url = URL(string: "https://api.exdev.cl/v1/permisos") else {
+            return Fail(error: ServerError.networkError).eraseToAnyPublisher()
+        }
         
-        var permiso: Permiso? = try? storageDetalle?.object(forKey: permisoSimple.id)
-        if(permiso == nil) {
-            let response = Just.post("https://api.exdev.cl/v1/permisos/\(permisoSimple.id)", json: ["correo": credentials.username, "contrasenia": credentials.password], headers: ["Content-Type": "application/json"])
-            if(response.ok){
-                permiso = JsonService.fromJson(Permiso.self, response.json!)
-                if(permiso != nil) {
-                    try? storageDetalle?.setObject(permiso!, forKey: permisoSimple.id)
+        var request = URLRequest(url: url, timeoutInterval: 20.0)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(credentials)
+        } catch {
+            return Fail(error: ServerError.encodeError).eraseToAnyPublisher()
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .mapError { error in
+                ServerError(mensaje: error.localizedDescription)
+            }
+            .map(\.data)
+            .flatMap(maxPublishers: .max(1)) { data -> AnyPublisher<[PermisoSimple], ServerError> in
+                print("decoding...")
+                do {
+                    if let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
+                        return Fail(error: serverError).eraseToAnyPublisher()
+                    }
+                    
+                    let permisos = try JSONDecoder().decode([PermisoSimple].self, from: data)
+                    try? storageSimple?.setObject(permisos, forKey: "permisos")
+                    return Just(permisos)
+                        .setFailureType(to: ServerError.self)
+                        .eraseToAnyPublisher()
+                } catch {
+                    print(error)
+                    return Fail(error: ServerError.decodeError).eraseToAnyPublisher()
                 }
             }
+            .eraseToAnyPublisher()
+    }
+    
+    func getPermisoDetallado(permisoSimple: PermisoSimple, credentials: Credentials) -> AnyPublisher<Permiso?, Never> {
+        guard let url = URL(string: "https://api.exdev.cl/v1/permisos/\(permisoSimple.id)") else {
+            return Just(nil).eraseToAnyPublisher()
         }
         
-        return permiso
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(credentials)
+        } catch {
+            return Just(nil).eraseToAnyPublisher()
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .map(\.data)
+            .decode(type: Permiso?.self, decoder: JSONDecoder())
+            .replaceError(with: nil)
+            .eraseToAnyPublisher()
     }
 }

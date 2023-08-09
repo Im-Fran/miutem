@@ -11,9 +11,9 @@ import Just
 import KeychainSwift
 import SwiftSoup
 
-struct Credentials {
-    var username: String
-    var password: String
+struct Credentials: Codable {
+    var correo: String
+    var contrasenia: String
 }
 
 struct Perfil: Codable {

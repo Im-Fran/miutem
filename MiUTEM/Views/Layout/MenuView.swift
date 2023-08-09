@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MenuView: View {
     
-    @EnvironmentObject var authService: AuthService
+    @EnvironmentObject var appService: AppService
     @Binding var isMenuVisible: Bool
     
     var body: some View {
@@ -25,55 +25,57 @@ struct MenuView: View {
             }
 
             
-            if(isMenuVisible) {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Rectangle()
-                            .fill(LinearGradient(
-                                colors: [.utemAzul, .utemVerde],
-                                startPoint: .bottomLeading,
-                                endPoint: .topTrailing
-                            ))
-                            .overlay {
-                                VStack(alignment: .leading) {
-                                    Circle()
-                                        .fill(.brand)
-                                        .frame(width: 75, height: 75)
-                                        .overlay {
-                                            Text(authService.perfil?.iniciales ?? "")
-                                                .foregroundColor(.white)
-                                        }
-                                    
-                                    Text(authService.perfil?.nombres.capitalized ?? "")
-                                        .bold()
-                                        .foregroundColor(.white)
-                                    Text(authService.perfil?.apellidos.capitalized ?? "")
-                                        .bold()
-                                        .foregroundColor(.white)
-                                    Text(verbatim: authService.perfil?.correoUtem ?? "")
-                                        .foregroundColor(.white)
-                                }
-                                .padding(.top, 50)
-                                .padding()
-                            }
-                            .frame(maxHeight: 200)
-                            .ignoresSafeArea()
-                        
-                        Divider()
-                        
-                        VStack {
-                            Text("Hello, World")
-                        }
-                        .padding()
-                        
-                        Spacer()
-                    }
-                    .frame(width: UIScreen.main.bounds.width / 1.5)
-                    .background(.white)
-                    
-                    Spacer()
-                }
-            }
+            /*
+             if(isMenuVisible) {
+                 HStack {
+                     VStack(alignment: .leading) {
+                         Rectangle()
+                             .fill(LinearGradient(
+                                 colors: [.utemAzul, .utemVerde],
+                                 startPoint: .bottomLeading,
+                                 endPoint: .topTrailing
+                             ))
+                             .overlay {
+                                 VStack(alignment: .leading) {
+                                     Circle()
+                                         .fill(.brand)
+                                         .frame(width: 75, height: 75)
+                                         .overlay {
+                                             Text(authService.perfil?.iniciales ?? "")
+                                                 .foregroundColor(.white)
+                                         }
+                                     
+                                     Text(authService.perfil?.nombres.capitalized ?? "")
+                                         .bold()
+                                         .foregroundColor(.white)
+                                     Text(authService.perfil?.apellidos.capitalized ?? "")
+                                         .bold()
+                                         .foregroundColor(.white)
+                                     Text(verbatim: authService.perfil?.correoUtem ?? "")
+                                         .foregroundColor(.white)
+                                 }
+                                 .padding(.top, 50)
+                                 .padding()
+                             }
+                             .frame(maxHeight: 200)
+                             .ignoresSafeArea()
+                         
+                         Divider()
+                         
+                         VStack {
+                             Text("Hello, World")
+                         }
+                         .padding()
+                         
+                         Spacer()
+                     }
+                     .frame(width: UIScreen.main.bounds.width / 1.5)
+                     .background(.white)
+                     
+                     Spacer()
+                 }
+             }
+             */
         }
         .animation(.default, value: isMenuVisible)
     }
@@ -82,10 +84,10 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     @State private static var isMenuVisible: Bool = true
-    @StateObject static var authService: AuthService = AuthService()
+    @StateObject static var appService = AppService()
     static var previews: some View {
         MenuView(isMenuVisible: $isMenuVisible)
             .ignoresSafeArea()
-            .environmentObject(authService)
+            .environmentObject(appService)
     }
 }

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "id",
+    "perfil": "Estudiante",
+    "motivo": "Permiso académico de ingreso a clases ",
+    "campus": null,
+    "dependencia": null,
+    "jornada": "Completa",
+    "fechaSolicitud": "2022-03-16T00:00:00.000Z"
+  }
+]

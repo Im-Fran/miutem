@@ -9,19 +9,20 @@ import SwiftUI
 
 @main
 struct MiUTEMApp: App {
-    @State private var isActive = true
-    @StateObject var authService: AuthService = AuthService()
+    @StateObject private var appService = AppService()
+    
+    @State private var isSplashActive = true
     
     var body: some Scene {
         WindowGroup {
-            if isActive {
-                SplashView(isActive: $isActive)
-            } else if (authService.status != "ok") {
+            if isSplashActive {
+                SplashView(isActive: $isSplashActive)
+            } else if (!appService.authService.hasCachedPerfil()) {
                 LoginView()
-                    .environmentObject(authService)
+                    .environmentObject(appService)
             } else {
                 HomeView()
-                    .environmentObject(authService)
+                    .environmentObject(appService)
             }
         }
     }

@@ -1,0 +1,17 @@
+{
+  "usuario": {
+    "nombreCompleto": "John Doe",
+    "rut": "12.345.678-9"
+  },
+  "codigoValidacion": "A1B2C3D4E",
+  "fechaSolicitud": "2022-03-16T00:00:00.000Z",
+  "motivo": "Permiso académico de ingreso a clases",
+  "codigoQr": "A1B2C3D4E5F6G7H8I9J0",
+  "codigoBarra": "01234567890AaBbC",
+  "jornada": "Completa",
+  "perfil": "Estudiante",
+  "vigencia": "Semestral",
+  "campus": null,
+  "dependencia": null,
+  "pdfBase64": ""
+}

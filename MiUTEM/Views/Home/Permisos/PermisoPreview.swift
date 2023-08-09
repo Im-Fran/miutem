@@ -8,16 +8,23 @@
 import SwiftUI
 import ActivityIndicatorView
 import Shimmer
+import Combine
 
 struct PermisoPreview: View {
-    @EnvironmentObject var authService: AuthService
+    @EnvironmentObject var appService: AppService
+    
+    @State var perfil: Perfil?
+    @State var permisosSimples: [PermisoSimple] = []
     
     @State var isLoading: Bool = true
+    
+    @State var cancellables: [AnyCancellable] = []
+    
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 30) {
-                if isLoading {
+                if isLoading || perfil == nil {
                     ZStack {
                         VStack {
                             Spacer()
@@ -57,8 +64,8 @@ struct PermisoPreview: View {
                         .cornerRadius(15)
                     }
                 } else {
-                    ForEach(authService.permisosSimples, id: \.self) { permiso in
-                        NavigationLink(destination: PermisoDetail(permisoSimple: permiso)) {
+                    ForEach(permisosSimples, id: \.self) { permiso in
+                        NavigationLink(destination: PermisoDetail(perfil: perfil!, permisoSimple: permiso)) {
                             VStack {
                                 Spacer()
                                 HStack {
@@ -97,28 +104,42 @@ struct PermisoPreview: View {
                     }
                 }
             }.onAppear {
-                isLoading = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + ([1,1.1,1.2,1.3,1.4,1.5].randomElement() ?? 1)) {
-                    authService.loadPermisos {
-                        if (!authService.permisosSimples.isEmpty) {
-                            isLoading.toggle()
-                        }
-                    }
+                if isLoading {
+                    // Carga perfil
+                    appService.authService.getPerfil()
+                        .receive(on: DispatchQueue.main)
+                        .sink(receiveCompletion: { _ in }, receiveValue: { perfil in
+                            self.perfil = perfil
+                            isLoading = false
+                        })
+                        .store(in: &cancellables)
+                    
+                    // Carga permisos
+                    appService.permisoService.getPermisosSimples(credentials: appService.authService.getStoredCredentials())
+                        .receive(on: DispatchQueue.main)
+                        .sink(receiveCompletion: { completion in
+                            switch completion {
+                            case .failure(let error):
+                                print(error)
+                                break
+                            case .finished:
+                                break;
+                            }
+                        }, receiveValue: { permisos in
+                            self.permisosSimples = permisos
+                            if !permisos.isEmpty {
+                                self.isLoading = false
+                            }
+                        })
+                        .store(in: &cancellables)
+                }
+            }.onDisappear {
+                cancellables.forEach { cancellable in
+                    cancellable.cancel()
                 }
             }
         }
         
-    }
-}
-
-
-struct PermisoPreview_Previews: PreviewProvider {
-    
-    @StateObject static var authService: AuthService = AuthService()
-    
-    static var previews: some View {
-        PermisoPreview()
-            .environmentObject(authService)
     }
 }
 

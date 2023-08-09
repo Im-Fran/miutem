@@ -5,158 +5,118 @@
 //  Created by Francisco Solis Maturana on 26-06-23.
 //
 
-import Cache
 import Foundation
-import Just
+import Cache
 import KeychainSwift
-import PDFKit
-import SwiftSoup
+import Combine
 
-class AuthService: ObservableObject {
-    @Published var status: String? = nil
-    @Published var perfil: Perfil? = nil
-    @Published var permisosSimples: [PermisoSimple] = []
-    @Published var carreras: [Carrera] = []
+class AuthService {
+    var perfil: Perfil?
+    
     let keychain = KeychainSwift()
+    let storage = try? Storage<String, Perfil>(
+        diskConfig: DiskConfig(name: "miutem.perfil", expiry: .seconds(604800), protectionType: .complete),
+        memoryConfig: MemoryConfig(expiry: .seconds(604800)),
+        transformer: TransformerFactory.forCodable(ofType: Perfil.self)
+    )
+    
+    var cancellables: [AnyCancellable] = []
     
     init() {
-        self.attemptLogin()
+        _ = hasCachedPerfil()
     }
     
     func getStoredCredentials() -> Credentials {
-        let username = keychain.get("username") ?? ""
-        let password = keychain.get("password") ?? ""
-        
-        return Credentials(username: username, password: password)
+        Credentials(correo: keychain.get("correo") ?? "", contrasenia: keychain.get("password") ?? "")
     }
     
     func storeCredentials(credentials: Credentials) {
-        if(credentials.username.isEmpty || credentials.password.isEmpty) {
+        if(credentials.correo.isEmpty || credentials.contrasenia.isEmpty) {
             return
         }
+        
+        let correo = credentials.correo.hasSuffix("@utem.cl") ? credentials.correo : "\(credentials.correo)@utem.cl"
+        keychain.set(correo, forKey: "correo")
+        keychain.set(credentials.contrasenia, forKey: "contrasenia")
+    }
+    
+    func hasCachedPerfil() -> Bool {
+        let cached = (try? storage?.existsObject(forKey: "perfil")) ?? false
+        if self.perfil == nil && cached {
+            // Run getPerfil to store it!
             
-        let username = credentials.username.hasSuffix("@utem.cl") ? credentials.username : "\(credentials.username)@utem.cl"
-        keychain.set(username, forKey: "username")
-        keychain.set(credentials.password, forKey: "password")
-    }
-    
-    func invalidatePermisos() {
-        PermisoService.invalidatePermisos()
-    }
-    
-    func extractLinesFromPDFData(_ pdfData: Data) -> [String] {
-        guard let pdfDocument = PDFDocument(data: pdfData) else {
-            return []
         }
         
-        var lines: [String] = []
+        return cached
+    }
+    
+    
+    func getPerfil() -> AnyPublisher<Perfil, ServerError> {
+        if self.perfil != nil {
+            return Just(self.perfil!)
+                .setFailureType(to: ServerError.self)
+                .eraseToAnyPublisher()
+        }
         
-        for pageIndex in 0..<pdfDocument.pageCount {
-            if let page = pdfDocument.page(at: pageIndex) {
-                if let pageText = page.string {
-                    let pageLines = pageText.components(separatedBy: .newlines)
-                    lines.append(contentsOf: pageLines)
+        try? storage?.removeExpiredObjects()
+        if let storedPerfil = try? storage?.object(forKey: "perfil") {
+            return Just(storedPerfil)
+                .setFailureType(to: ServerError.self)
+                .handleEvents(receiveOutput: { perfil in
+                    self.perfil = perfil
+                })
+                .eraseToAnyPublisher()
+        }
+        
+        guard let url = URL(string: "https://api.exdev.cl/v1/auth") else {
+            return Fail(error: .networkError)
+                .eraseToAnyPublisher()
+        }
+        
+        var request = URLRequest(url: url, timeoutInterval: 20.0)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(self.getStoredCredentials())
+        } catch {
+            return Fail(error: .encodeError).eraseToAnyPublisher()
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response -> Data in
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    throw ServerError.networkError
                 }
-            }
-        }
-        
-        return lines
-    }
-    
-    func loadPermisos(onFinish: @escaping () -> Void = {}) {
-        DispatchQueue.global(qos: .utility).async {
-            let permisosSimples = PermisoService.getPermisos(credentials: self.getStoredCredentials())
-            DispatchQueue.main.async {
-                self.permisosSimples = permisosSimples
-                onFinish()
-            }
-        }
-    }
-    
-    func attemptLogin(onFinish: @escaping () -> Void = {}) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            print("Intentando login...")
-            let storage = try? Storage<String, Perfil>(
-                diskConfig: DiskConfig(name: "miutem.perfil", expiry: .seconds(604800), protectionType: .complete),
-                memoryConfig: MemoryConfig(expiry: .seconds(604800)),
-                transformer: TransformerFactory.forCodable(ofType: Perfil.self)
-            )
-            try? storage?.removeExpiredObjects()
-            print("Perfil en cache cargado!")
-            
-            var perfil: Perfil? = try? storage?.object(forKey: "perfil")
-            if(perfil != nil) {
-                // Prueba el token al hacer una solicitud a carreras y guardarla en el perfil
-                let carreras = CarreraService.getCarreras(token: perfil!.token)
-                if(!carreras.isEmpty) {
-                    print("Datos en cache válidos!")
-                    return DispatchQueue.main.async {
-                        self.perfil = perfil
-                        self.carreras = carreras
-                        self.status = "ok"
-                        onFinish()
+                        
+                switch httpResponse.statusCode {
+                case 200:
+                    return data
+                default:
+                    if let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
+                        throw serverError
+                    } else {
+                        throw ServerError.unknownError
                     }
                 }
             }
-            
-            
-            let username = self.keychain.get("username") ?? ""
-            let password = self.keychain.get("password") ?? ""
-            if(username.isEmpty || password.isEmpty) {
-                print("Credenciales vacias.")
-                return DispatchQueue.main.async {
-                    self.status = nil
-                    onFinish()
+            .decode(type: Perfil.self, decoder: JSONDecoder())
+            .handleEvents(receiveOutput: { perfil in
+                try? self.storage?.setObject(perfil, forKey: "perfil")
+            })
+            .mapError { error in
+                if let serverError = error as? ServerError {
+                    return serverError
+                } else {
+                    return .unknownError
                 }
             }
-            
-            print("Probando credenciales...")
-            let response = Just.post("https://api.exdev.cl/v1/auth", data: ["correo": username, "contrasenia": password], headers: ["Content-Type": "application/json"])
-            let json = response.json as? [String: Any] ?? [:]
-            if(!response.ok || json["mensaje"] != nil) {
-                let error = json["mensaje"] as? String ?? "Error desconocido! Por favor intenta más tarde."
-                print("Error en respuesta. \(error)")
-                return DispatchQueue.main.async {
-                    self.status = error
-                    onFinish()
-                }
-            }
-            
-            perfil = JsonService.fromJson(Perfil.self, json)
-            if(perfil == nil) {
-                print("Perfil nulo")
-                return DispatchQueue.main.async {
-                    self.status = "Error al decodificar datos! Intenta más tarde."
-                    onFinish()
-                }
-            }
-            
-            // Ahora se obtiene las carreras
-            let carreras = CarreraService.getCarreras(token: perfil!.token)
-            if(carreras.isEmpty) {
-                print("Carreras no encontradas")
-                return DispatchQueue.main.async {
-                    self.status = "Error al obtener datos de carreras! Intenta más tarde."
-                    onFinish()
-                }
-            }
-            
-            print("Todo ok!")
-            
-            return DispatchQueue.main.async {
-                self.perfil = perfil
-                self.carreras = carreras
-                try? storage?.setObject(perfil!, forKey: "perfil")
-                self.status = "ok"
-                onFinish()
-            }
-        }
+            .eraseToAnyPublisher()
     }
     
     func logout() {
-        self.keychain.delete("username")
-        self.keychain.delete("password")
-        self.status = nil
-        self.perfil = nil
+        keychain.delete("correo")
+        keychain.delete("contrasenia")
+        try? storage?.removeAll()
     }
 }

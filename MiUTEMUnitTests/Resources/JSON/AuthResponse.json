@@ -1,0 +1,15 @@
+{
+  "token": "token",
+  "rut": 12345678,
+  "nombreCompleto": "JOHN DOE",
+  "correoPersonal": "john.doe@example.com",
+  "correoUtem": "john.doe@utem.cl",
+  "fotoBase64": null,
+  "perfiles": [
+    "Estudiante"
+  ],
+  "nombres": "JOHN",
+  "apellidos": "DOE",
+  "username": "john.doe",
+  "fotoUrl": null
+}

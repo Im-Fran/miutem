@@ -6,10 +6,17 @@
 //
 
 import SwiftUI
+import Shimmer
+import Combine
 
 struct HomeView: View {
-    @EnvironmentObject var authService: AuthService
+    @EnvironmentObject var appService: AppService
+    
+    @State var perfil: Perfil?
+    @State var cancellables: [AnyCancellable] = []
+    
     @State var isMenuVisible: Bool = false
+    @State var isLoading = true
     
     var body: some View {
         NavigationStack {
@@ -22,11 +29,23 @@ struct HomeView: View {
                 
                 VStack {
                     HStack {
-                        VStack {
-                            Text("Tiempo sin vernos,\n\(Text("\(authService.perfil?.primerNombre ?? "")").fontWeight(.semibold))")
+                        VStack(alignment: .leading){
+                            Text("Tiempo sin vernos,")
                                 .foregroundColor(.black)
                                 .font(.title)
-                        }.multilineTextAlignment(.leading)
+                            if isLoading {
+                                Text("Usuario")
+                                    .foregroundColor(.black)
+                                    .font(.title)
+                                    .redacted(reason: .placeholder)
+                                    .shimmering()
+                            } else {
+                                Text(perfil?.primerNombre ?? "")
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.black)
+                                    .font(.title)
+                            }
+                        }
                         Spacer()
                     }
                     Spacer().frame(height: 50)
@@ -39,17 +58,16 @@ struct HomeView: View {
                         }
                         
                         PermisoPreview()
+                            .environmentObject(appService)
                     }
                     
                     Spacer()
                 }
                 .padding()
-                .refreshable {
-                    authService.invalidatePermisos()
-                    authService.loadPermisos()
+                
+                if isMenuVisible {
+                    Text("Hello, World!")
                 }
-                
-                
                 // MenuView(isMenuVisible: $isMenuVisible).ignoresSafeArea().zIndex(5)
             }
             .background(.lightGrey)
@@ -88,14 +106,30 @@ struct HomeView: View {
                     }
                 }
             )
+            
+            .onAppear {
+                if isLoading {
+                    self.appService.authService.getPerfil()
+                        .sink(receiveCompletion: { _ in }, receiveValue: { perfil in
+                            self.perfil = perfil
+                            isLoading = false
+                        })
+                        .store(in: &cancellables)
+                }
+            }
+            .onDisappear {
+                cancellables.forEach { cancellable in
+                    cancellable.cancel()
+                }
+            }
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
-    @StateObject static var authService: AuthService = AuthService()
+    @StateObject static var appService: AppService = AppService()
     static var previews: some View {
         HomeView()
-            .environmentObject(authService)
+            .environmentObject(appService)
     }
 }
