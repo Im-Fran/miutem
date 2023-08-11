@@ -10,10 +10,7 @@ import Shimmer
 import Combine
 
 struct HomeView: View {
-    @EnvironmentObject var appService: AppService
-    
     @State var perfil: Perfil?
-    @State var cancellables: [AnyCancellable] = []
     
     @State var isMenuVisible: Bool = false
     @State var isLoading = true
@@ -26,6 +23,7 @@ struct HomeView: View {
                     .frame(width: UIScreen.main.bounds.width, height: 125)
                     .ignoresSafeArea()
                     .position(x: UIScreen.main.bounds.width/2, y: 0)
+                    .zIndex(0)
                 
                 VStack {
                     HStack {
@@ -58,17 +56,16 @@ struct HomeView: View {
                         }
                         
                         PermisoPreview()
-                            .environmentObject(appService)
                     }
                     
                     Spacer()
                 }
                 .padding()
                 
-                if isMenuVisible {
-                    Text("Hello, World!")
-                }
-                // MenuView(isMenuVisible: $isMenuVisible).ignoresSafeArea().zIndex(5)
+                
+                MenuView(isMenuVisible: $isMenuVisible)
+                    .ignoresSafeArea()
+                    .zIndex(1)
             }
             .background(.lightGrey)
             .toolbar {
@@ -109,17 +106,16 @@ struct HomeView: View {
             
             .onAppear {
                 if isLoading {
-                    self.appService.authService.getPerfil()
-                        .sink(receiveCompletion: { _ in }, receiveValue: { perfil in
+                    Task {
+                        do {
+                            let perfil = try await AuthService.getPerfil()
                             self.perfil = perfil
                             isLoading = false
-                        })
-                        .store(in: &cancellables)
-                }
-            }
-            .onDisappear {
-                cancellables.forEach { cancellable in
-                    cancellable.cancel()
+                        } catch {
+                            print(error.localizedDescription)
+                            // Handle error
+                        }
+                    }
                 }
             }
         }
@@ -127,9 +123,7 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
-    @StateObject static var appService: AppService = AppService()
     static var previews: some View {
         HomeView()
-            .environmentObject(appService)
     }
 }

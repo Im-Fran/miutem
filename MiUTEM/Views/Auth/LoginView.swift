@@ -1,14 +1,15 @@
 import SwiftUI
 import AVKit
 import AVFoundation
-import PopupView
 import ActivityIndicatorView
 import Combine
-import AlertToast
+import SystemNotification
 
 struct LoginView: View {
     
-    @EnvironmentObject var appService: AppService
+    @StateObject var notificationContext = SystemNotificationContext()
+    
+    @Binding var isLoggedIn: Bool
     
     @State private var correo: String = ""
     @FocusState private var isCorreoFocused: Bool
@@ -17,11 +18,6 @@ struct LoginView: View {
     @FocusState private var isContraseniaFocused: Bool
     
     @State private var isShowingLoadingIndicator: Bool = false
-    
-    @State private var errorMessage: String? = nil
-    @State private var isPopupPresented: Bool = true
-    
-    @State var cancellables: [AnyCancellable] = []
     
     var body: some View {
         ZStack {
@@ -75,7 +71,6 @@ struct LoginView: View {
                      Spacer().frame(height: 50)
 
                      Button("Iniciar") {
-                         errorMessage = nil
                          isShowingLoadingIndicator = true // Show loading indicator when button is tapped
 
                          if isCorreoFocused {
@@ -87,37 +82,31 @@ struct LoginView: View {
                          }
 
                          if contrasenia.isEmpty {
-                             errorMessage = "Por favor ingresa una contraseña!"
+                             showError(error: "Ingresa una contraseña válida!")
                              isShowingLoadingIndicator = false
                              return
                          }
 
                          if correo.isEmpty {
-                             errorMessage = "Por favor ingresa un usuario/correo!"
+                             showError(error: "Por favor ingresa un usuario/correo!")
                              isShowingLoadingIndicator = false
                              return
                          }
 
-                         appService.authService.storeCredentials(credentials: Credentials(correo: correo, contrasenia: contrasenia))
-
-                         appService.authService.getPerfil()
-                             .receive(on: DispatchQueue.main)
-                             .sink(receiveCompletion: { completion in
-                                 switch completion {
-                                 case .failure(let error):
-                                     errorMessage = error.localizedDescription
-                                     isShowingLoadingIndicator = false
-                                     break
-                                 case .finished:
-                                     isShowingLoadingIndicator = false
-                                     break
-                                 }
-                             }, receiveValue: { perfil in
-                                 appService.authService.perfil = perfil
-                                 isShowingLoadingIndicator = false
-                             }).store(in: &cancellables)
+                         CredentialsService.storeCredentials(credentials: Credentials(correo: correo, contrasenia: contrasenia))
+                         
+                         Task {
+                             do {
+                                 _ = try await AuthService.getPerfil()
+                                 isLoggedIn.toggle()
+                             } catch {
+                                 print(error)
+                                 showError(error: (error as? ServerError)?.mensaje ?? error.localizedDescription)
+                             }
+                             isShowingLoadingIndicator = false
+                         }
                      }
-                     .disabled(isShowingLoadingIndicator || isPopupPresented) // Disable button while loading
+                     .disabled(isShowingLoadingIndicator || notificationContext.isActive) // Disable button while loading
                      .frame(width: UIScreen.main.bounds.width * 1/4, height: 35)
                      .background(Capsule().fill(Color(hex: 0xFF009D9B)))
                      .font(.title3)
@@ -137,37 +126,30 @@ struct LoginView: View {
                      .lineLimit(2)
                      .foregroundColor(.white)
              }
-             .toast(isPresenting: $isPopupPresented) {
-                 AlertToast(type: .regular, title: "Message Sent!")
-             }
-             /*
-              .popup(isPresented: $isPopupPresented) {
-                  VStack {
-                      Text("\(Text("Error").font(.title3).fontWeight(.bold))\n\(self.errorMessage ?? "No sabemos que ocurrió! Por favor intenta más tarde.")")
-                          .multilineTextAlignment(.leading)
-                          .padding()
-                  }
-                  .frame(maxWidth: UIScreen.main.bounds.width * 0.8)
-                  .foregroundColor(.white)
-                  .background(Rectangle().fill(Color(hex: 0xFF009D9B)).cornerRadius(15))
-                  .padding()
-              } customize: {
-                  $0.autohideIn(5)
-                      .position(.bottom)
-                      .dragToDismiss(true)
-              }
-              */
         }
+        .systemNotification(notificationContext)
         .onAppear {
-            let credentials: Credentials = appService.authService.getStoredCredentials()
+            let credentials = CredentialsService.getStoredCredentials()
             
             correo = credentials.correo
             contrasenia = credentials.contrasenia
-            
-            
         }
-        .onDisappear {
-            cancellables.forEach { it in it.cancel() }
+    }
+    
+    func showError(error: String) {
+        notificationContext.present(configuration: .init(animation: .easeInOut, duration: 5), style: .init(backgroundColor: Color(hex: 0xFF009D9B), edge: .bottom)) {
+            SystemNotificationMessage(
+                icon: Image(systemName: "x.circle"),
+                title: "Error",
+                text: "\(error)",
+                style: .init(
+                    iconColor: .red,
+                    iconFont: .headline,
+                    textColor: .white,
+                    titleColor: .white,
+                    titleFont: .headline
+                )
+            )
         }
     }
 }
@@ -208,9 +190,8 @@ struct VideoPlayerView: View {
 }
 
 struct LoginView_Previews: PreviewProvider {
-    @StateObject static var appService = AppService()
+    @State private static var isLoggedIn = false
     static var previews: some View {
-        LoginView()
-            .environmentObject(appService)
+        LoginView(isLoggedIn: $isLoggedIn)
     }
 }

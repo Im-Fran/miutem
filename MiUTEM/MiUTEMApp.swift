@@ -6,23 +6,29 @@
 //
 
 import SwiftUI
+import Combine
 
 @main
 struct MiUTEMApp: App {
-    @StateObject private var appService = AppService()
     
     @State private var isSplashActive = true
+    @State private var isLoggedIn = false
+    
     
     var body: some Scene {
         WindowGroup {
             if isSplashActive {
                 SplashView(isActive: $isSplashActive)
-            } else if (!appService.authService.hasCachedPerfil()) {
-                LoginView()
-                    .environmentObject(appService)
+                    .onAppear {
+                        Task {
+                            let cached = AuthService.hasCachedPerfil()
+                            isLoggedIn = cached
+                        }
+                    }
+            } else if !isLoggedIn {
+                LoginView(isLoggedIn: $isLoggedIn)
             } else {
                 HomeView()
-                    .environmentObject(appService)
             }
         }
     }

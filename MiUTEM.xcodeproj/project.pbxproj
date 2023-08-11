@@ -10,7 +10,7 @@
 		A1189FA32A7E7EC900B9A3C1 /* PermisoServiceUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1189FA22A7E7EC900B9A3C1 /* PermisoServiceUnitTest.swift */; };
 		A1189FA52A7E93D200B9A3C1 /* PermisosResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A1189FA42A7E93D200B9A3C1 /* PermisosResponse.json */; };
 		A1189FA72A7E940400B9A3C1 /* PermisoResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A1189FA62A7E940400B9A3C1 /* PermisoResponse.json */; };
-		A11ADB702A83E12F0004F264 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = A11ADB6F2A83E12F0004F264 /* AlertToast */; };
+		A11ADB752A85C8FF0004F264 /* SystemNotification in Frameworks */ = {isa = PBXBuildFile; productRef = A11ADB742A85C8FF0004F264 /* SystemNotification */; };
 		A12D875B2A43AB4800A0D1A2 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = A12D875A2A43AB4800A0D1A2 /* RiveRuntime */; };
 		A12D875E2A43AB5500A0D1A2 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A12D875D2A43AB5500A0D1A2 /* KeychainSwift */; };
 		A12D87642A43ABEF00A0D1A2 /* Just in Frameworks */ = {isa = PBXBuildFile; productRef = A12D87632A43ABEF00A0D1A2 /* Just */; };
@@ -33,12 +33,12 @@
 		A196980C2A44A28800D58F58 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A196980B2A44A28800D58F58 /* Helpers.swift */; };
 		A196980F2A44BEC200D58F58 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = A196980E2A44BEC200D58F58 /* PopupView */; };
 		A198014C2A7DF1DB00E73297 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A198014B2A7DF1DB00E73297 /* ServerError.swift */; };
-		A1A1F4412A7BDF6F00849EC4 /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A1F4402A7BDF6F00849EC4 /* AppService.swift */; };
 		A1A1F44A2A7BEC7900849EC4 /* MiUTEMUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A1F4492A7BEC7900849EC4 /* MiUTEMUnitTests.swift */; };
 		A1A1F4522A7BEC9B00849EC4 /* AuthServiceUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A1F4512A7BEC9B00849EC4 /* AuthServiceUnitTest.swift */; };
 		A1A1F4582A7C365300849EC4 /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A1F4572A7C365300849EC4 /* MockedData.swift */; };
 		A1A1F45C2A7C36D000849EC4 /* AuthResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A1A1F45B2A7C36D000849EC4 /* AuthResponse.json */; };
 		A1A1F45F2A7C3F3600849EC4 /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1F45E2A7C3F3600849EC4 /* Mocker */; };
+		A1C735C92A85E1DF0008E03A /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C735C82A85E1DF0008E03A /* HTTPClient.swift */; };
 		A1DC1B7F2A435A7000AFF8E1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DC1B7E2A435A7000AFF8E1 /* User.swift */; };
 		A1F722BE2A4A05B000E30CF9 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = A1F722BD2A4A05B000E30CF9 /* SwiftSoup */; };
 		A1F722CF2A4A41E000E30CF9 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = A1F722CE2A4A41E000E30CF9 /* Cache */; };
@@ -80,12 +80,12 @@
 		A188D1072A4B23DC00A735F0 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		A196980B2A44A28800D58F58 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		A198014B2A7DF1DB00E73297 /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
-		A1A1F4402A7BDF6F00849EC4 /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
 		A1A1F4472A7BEC7900849EC4 /* MiUTEMUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiUTEMUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1A1F4492A7BEC7900849EC4 /* MiUTEMUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiUTEMUnitTests.swift; sourceTree = "<group>"; };
 		A1A1F4512A7BEC9B00849EC4 /* AuthServiceUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceUnitTest.swift; sourceTree = "<group>"; };
 		A1A1F4572A7C365300849EC4 /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
 		A1A1F45B2A7C36D000849EC4 /* AuthResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AuthResponse.json; sourceTree = "<group>"; };
+		A1C735C82A85E1DF0008E03A /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		A1DC1B7E2A435A7000AFF8E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1F722D12A4A46E000E30CF9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A1F722D62A4A737E00E30CF9 /* PermisoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermisoDetail.swift; sourceTree = "<group>"; };
@@ -101,10 +101,10 @@
 				A12D875E2A43AB5500A0D1A2 /* KeychainSwift in Frameworks */,
 				A1F722CF2A4A41E000E30CF9 /* Cache in Frameworks */,
 				A12D87642A43ABEF00A0D1A2 /* Just in Frameworks */,
-				A11ADB702A83E12F0004F264 /* AlertToast in Frameworks */,
 				A196980F2A44BEC200D58F58 /* PopupView in Frameworks */,
 				A1F722D52A4A548300E30CF9 /* Shimmer in Frameworks */,
 				A12D87672A43B36800A0D1A2 /* ActivityIndicatorView in Frameworks */,
+				A11ADB752A85C8FF0004F264 /* SystemNotification in Frameworks */,
 				A12D875B2A43AB4800A0D1A2 /* RiveRuntime in Frameworks */,
 				A1F722BE2A4A05B000E30CF9 /* SwiftSoup in Frameworks */,
 			);
@@ -150,6 +150,7 @@
 			children = (
 				A158B7242A7B546700748C70 /* JsonService.swift */,
 				A1F722DC2A4A86B300E30CF9 /* QRGeneratorService.swift */,
+				A1C735C82A85E1DF0008E03A /* HTTPClient.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -298,7 +299,6 @@
 				A1F722D12A4A46E000E30CF9 /* AuthService.swift */,
 				A158B71D2A7B473D00748C70 /* CarreraService.swift */,
 				A158B7262A7B568E00748C70 /* PermisoService.swift */,
-				A1A1F4402A7BDF6F00849EC4 /* AppService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -328,7 +328,7 @@
 				A1F722BD2A4A05B000E30CF9 /* SwiftSoup */,
 				A1F722CE2A4A41E000E30CF9 /* Cache */,
 				A1F722D42A4A548300E30CF9 /* Shimmer */,
-				A11ADB6F2A83E12F0004F264 /* AlertToast */,
+				A11ADB742A85C8FF0004F264 /* SystemNotification */,
 			);
 			productName = MiUTEM;
 			productReference = A162F84D2A427D9D0041DE2D /* MiUTEM.app */;
@@ -393,7 +393,7 @@
 				A1F722CD2A4A41E000E30CF9 /* XCRemoteSwiftPackageReference "Cache" */,
 				A1F722D32A4A548300E30CF9 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 				A1A1F45D2A7C3F3600849EC4 /* XCRemoteSwiftPackageReference "Mocker" */,
-				A11ADB6E2A83E12F0004F264 /* XCRemoteSwiftPackageReference "AlertToast" */,
+				A11ADB732A85C8FF0004F264 /* XCRemoteSwiftPackageReference "SystemNotification" */,
 			);
 			productRefGroup = A162F84E2A427D9D0041DE2D /* Products */;
 			projectDirPath = "";
@@ -448,9 +448,9 @@
 				A15A7C992A494444004004F5 /* Permiso.swift in Sources */,
 				A1F722DD2A4A86B300E30CF9 /* QRGeneratorService.swift in Sources */,
 				A158B71E2A7B473D00748C70 /* CarreraService.swift in Sources */,
+				A1C735C92A85E1DF0008E03A /* HTTPClient.swift in Sources */,
 				A158B71C2A7B442700748C70 /* Carrera.swift in Sources */,
 				A158B7272A7B568E00748C70 /* PermisoService.swift in Sources */,
-				A1A1F4412A7BDF6F00849EC4 /* AppService.swift in Sources */,
 				A198014C2A7DF1DB00E73297 /* ServerError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -724,12 +724,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A11ADB6E2A83E12F0004F264 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+		A11ADB732A85C8FF0004F264 /* XCRemoteSwiftPackageReference "SystemNotification" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elai950/AlertToast";
+			repositoryURL = "https://github.com/danielsaidi/SystemNotification.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 0.7.2;
 			};
 		};
 		A12D87592A43AB4800A0D1A2 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
@@ -807,10 +807,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A11ADB6F2A83E12F0004F264 /* AlertToast */ = {
+		A11ADB742A85C8FF0004F264 /* SystemNotification */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A11ADB6E2A83E12F0004F264 /* XCRemoteSwiftPackageReference "AlertToast" */;
-			productName = AlertToast;
+			package = A11ADB732A85C8FF0004F264 /* XCRemoteSwiftPackageReference "SystemNotification" */;
+			productName = SystemNotification;
 		};
 		A12D875A2A43AB4800A0D1A2 /* RiveRuntime */ = {
 			isa = XCSwiftPackageProductDependency;

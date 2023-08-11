@@ -10,90 +10,59 @@ import Cache
 import Combine
 import Just
 
-struct PermisosService {
-    private let storageSimple = try? Storage<String, [PermisoSimple]>(
-        diskConfig: DiskConfig(name: "miutem.permisos-simples", expiry: .seconds(43200), protectionType: .complete),
-        memoryConfig: MemoryConfig(expiry: .seconds(43200)),
-        transformer: TransformerFactory.forCodable(ofType: [PermisoSimple].self)
-    )
-    
-    private let storageDetalle = try? Storage<String, Permiso>(
-        diskConfig: DiskConfig(name: "miutem.permisos-detalle", expiry: .seconds(43200), protectionType: .complete),
-        memoryConfig: MemoryConfig(expiry: .seconds(43200)),
-        transformer: TransformerFactory.forCodable(ofType: Permiso.self)
-    )
-    
-    func invalidateCaches() {
-        try? storageSimple?.removeAll()
-        try? storageDetalle?.removeAll()
+class PermisosService {
+    static func invalidateCaches() {
+        try? GlobalStorage.shared?.removeExpiredObjects()
+        try? GlobalStorage.shared?.removeObject(forKey: "permisos")
     }
     
-    func getPermisosSimples(credentials: Credentials) -> AnyPublisher<[PermisoSimple], ServerError> {
-        try? storageSimple?.removeExpiredObjects()
-        if let permisos = try? storageSimple?.object(forKey: "permisos") {
-            return Just(permisos)
-                .setFailureType(to: ServerError.self)
-                .eraseToAnyPublisher()
+    /* Obtiene permisos simples de manera async */
+    static func getPermisosSimples() async throws -> [PermisoSimple] {
+        try? GlobalStorage.shared?.removeExpiredObjects()
+        if let permisos = try? GlobalStorage.shared?.transformCodable(ofType: [PermisoSimple].self).object(forKey: "permisos") {
+            return permisos
         }
         
-        guard let url = URL(string: "https://api.exdev.cl/v1/permisos") else {
-            return Fail(error: ServerError.networkError).eraseToAnyPublisher()
+        let (data, _, _) = try await HTTPRequest(method: .post, uri: "https://api.exdev.cl/v1/permisos", body: .json(CredentialsService.getStoredCredentials())).perform()
+        if data == nil {
+            throw ServerError.networkError
         }
         
-        var request = URLRequest(url: url, timeoutInterval: 20.0)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            request.httpBody = try JSONEncoder().encode(credentials)
-        } catch {
-            return Fail(error: ServerError.encodeError).eraseToAnyPublisher()
-        }
-        
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .mapError { error in
-                ServerError(mensaje: error.localizedDescription)
-            }
-            .map(\.data)
-            .flatMap(maxPublishers: .max(1)) { data -> AnyPublisher<[PermisoSimple], ServerError> in
-                print("decoding...")
-                do {
-                    if let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
-                        return Fail(error: serverError).eraseToAnyPublisher()
-                    }
-                    
-                    let permisos = try JSONDecoder().decode([PermisoSimple].self, from: data)
-                    try? storageSimple?.setObject(permisos, forKey: "permisos")
-                    return Just(permisos)
-                        .setFailureType(to: ServerError.self)
-                        .eraseToAnyPublisher()
-                } catch {
-                    print(error)
-                    return Fail(error: ServerError.decodeError).eraseToAnyPublisher()
-                }
-            }
-            .eraseToAnyPublisher()
+        let permisosSimples = try JSONDecoder().decode([PermisoSimple].self, from: data!)
+        try? GlobalStorage.shared?.transformCodable(ofType: [PermisoSimple].self).setObject(permisosSimples, forKey: "permisos")
+        return permisosSimples
     }
     
-    func getPermisoDetallado(permisoSimple: PermisoSimple, credentials: Credentials) -> AnyPublisher<Permiso?, Never> {
-        guard let url = URL(string: "https://api.exdev.cl/v1/permisos/\(permisoSimple.id)") else {
-            return Just(nil).eraseToAnyPublisher()
+    /* Obtiene permiso detallado de manera async */
+    static func getPermisoDetallado(permisoSimple: PermisoSimple) async throws -> Permiso {
+        try? GlobalStorage.shared?.removeExpiredObjects()
+        if let permiso = try? GlobalStorage.shared?.transformCodable(ofType: Permiso.self).object(forKey: "permiso.\(permisoSimple.id)") {
+            return permiso
         }
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            request.httpBody = try JSONEncoder().encode(credentials)
-        } catch {
-            return Just(nil).eraseToAnyPublisher()
+        let (data, _, _) = try await HTTPRequest(method: .post, uri: "https://api.exdev.cl/v1/permisos/\(permisoSimple.id)", body: .json(CredentialsService.getStoredCredentials())).perform()
+        if data == nil {
+            throw ServerError.networkError
         }
         
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .map(\.data)
-            .decode(type: Permiso?.self, decoder: JSONDecoder())
-            .replaceError(with: nil)
-            .eraseToAnyPublisher()
+        let permiso = try JSONDecoder().decode(Permiso.self, from: data!)
+        try? GlobalStorage.shared?.transformCodable(ofType: Permiso.self).setObject(permiso, forKey: "permiso.\(permisoSimple.id)")
+        return permiso
     }
+    
+    /* Genera un codigo qr basado el permiso y su tamaño. */
+    static func generateQr(permiso: Permiso, size: CGSize = .init(width: 128, height: 128)) async -> Image? {
+        try? GlobalStorage.shared?.removeExpiredObjects()
+        if let cached = try? GlobalStorage.shared?.transformImage().object(forKey: "qr.\(permiso.codigoQr)-\(size.width)x\(size.height)") {
+            return cached
+        }
+        
+        if let image = QRGeneratorService.qrCode(text: permiso.codigoQr, size: size) {
+            try? GlobalStorage.shared?.transformImage().setObject(image, forKey: "qr.\(permiso.codigoQr)-\(size.width)x\(size.height)")
+            return image
+        }
+        
+        return nil
+    }
+    
 }

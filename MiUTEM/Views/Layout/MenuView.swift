@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct MenuView: View {
     
-    @EnvironmentObject var appService: AppService
     @Binding var isMenuVisible: Bool
+    
+    @State var perfil: Perfil?
     
     var body: some View {
         ZStack {
@@ -25,8 +27,7 @@ struct MenuView: View {
             }
 
             
-            /*
-             if(isMenuVisible) {
+             if isMenuVisible && perfil != nil {
                  HStack {
                      VStack(alignment: .leading) {
                          Rectangle()
@@ -41,17 +42,17 @@ struct MenuView: View {
                                          .fill(.brand)
                                          .frame(width: 75, height: 75)
                                          .overlay {
-                                             Text(authService.perfil?.iniciales ?? "")
+                                             Text(perfil?.iniciales ?? "")
                                                  .foregroundColor(.white)
                                          }
                                      
-                                     Text(authService.perfil?.nombres.capitalized ?? "")
+                                     Text(perfil?.nombres.capitalized ?? "")
                                          .bold()
                                          .foregroundColor(.white)
-                                     Text(authService.perfil?.apellidos.capitalized ?? "")
+                                     Text(perfil?.apellidos.capitalized ?? "")
                                          .bold()
                                          .foregroundColor(.white)
-                                     Text(verbatim: authService.perfil?.correoUtem ?? "")
+                                     Text(verbatim: perfil?.correoUtem ?? "")
                                          .foregroundColor(.white)
                                  }
                                  .padding(.top, 50)
@@ -75,19 +76,23 @@ struct MenuView: View {
                      Spacer()
                  }
              }
-             */
         }
         .animation(.default, value: isMenuVisible)
+        .onAppear {
+            Task {
+                let perfil = try? await AuthService.getPerfil()
+                self.perfil = perfil
+            }
+        }
     }
 }
 
 
 struct MenuView_Previews: PreviewProvider {
     @State private static var isMenuVisible: Bool = true
-    @StateObject static var appService = AppService()
+    
     static var previews: some View {
         MenuView(isMenuVisible: $isMenuVisible)
             .ignoresSafeArea()
-            .environmentObject(appService)
     }
 }

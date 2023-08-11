@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "alerttoast",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/elai950/AlertToast",
-      "state" : {
-        "revision" : "b39252eacd159904afd7d718bba0afabb87f2f2f",
-        "version" : "1.3.9"
-      }
-    },
-    {
       "identity" : "cache",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hyperoslo/Cache",
@@ -88,6 +79,15 @@
       "state" : {
         "revision" : "17b66b0e7d94d2d3f220bbcb021b5026436f06c7",
         "version" : "1.3.0"
+      }
+    },
+    {
+      "identity" : "systemnotification",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/danielsaidi/SystemNotification.git",
+      "state" : {
+        "revision" : "53a23f15ea9d62376179681d24f6ef0d53b03f8c",
+        "version" : "0.7.2"
       }
     }
   ],

@@ -11,14 +11,10 @@ import Shimmer
 import Combine
 
 struct PermisoPreview: View {
-    @EnvironmentObject var appService: AppService
-    
     @State var perfil: Perfil?
     @State var permisosSimples: [PermisoSimple] = []
     
     @State var isLoading: Bool = true
-    
-    @State var cancellables: [AnyCancellable] = []
     
     
     var body: some View {
@@ -106,36 +102,21 @@ struct PermisoPreview: View {
             }.onAppear {
                 if isLoading {
                     // Carga perfil
-                    appService.authService.getPerfil()
-                        .receive(on: DispatchQueue.main)
-                        .sink(receiveCompletion: { _ in }, receiveValue: { perfil in
+                    Task {
+                        do {
+                            let perfil = try? await AuthService.getPerfil()
                             self.perfil = perfil
-                            isLoading = false
-                        })
-                        .store(in: &cancellables)
-                    
-                    // Carga permisos
-                    appService.permisoService.getPermisosSimples(credentials: appService.authService.getStoredCredentials())
-                        .receive(on: DispatchQueue.main)
-                        .sink(receiveCompletion: { completion in
-                            switch completion {
-                            case .failure(let error):
-                                print(error)
-                                break
-                            case .finished:
-                                break;
-                            }
-                        }, receiveValue: { permisos in
+                            
+                            let permisos = try await PermisosService.getPermisosSimples()
                             self.permisosSimples = permisos
-                            if !permisos.isEmpty {
-                                self.isLoading = false
+                            
+                            if !self.permisosSimples.isEmpty {
+                                isLoading = false
                             }
-                        })
-                        .store(in: &cancellables)
-                }
-            }.onDisappear {
-                cancellables.forEach { cancellable in
-                    cancellable.cancel()
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
                 }
             }
         }

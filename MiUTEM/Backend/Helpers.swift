@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Cache
 
 @available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *)
 extension ShapeStyle where Self == Color {
@@ -131,4 +132,15 @@ extension String {
             return nil // Error al formatear el número
         }
     }
+}
+
+class GlobalStorage {
+    
+    static let shared: Storage<String, Data>? = {
+        return try? Storage<String, Data>(
+            diskConfig: DiskConfig(name: "miutem", expiry: .seconds(432000), protectionType: .complete),
+            memoryConfig: MemoryConfig(expiry: .seconds(21600)),
+            transformer: TransformerFactory.forData()
+        )
+    }()
 }

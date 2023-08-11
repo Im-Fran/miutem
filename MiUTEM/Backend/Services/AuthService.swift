@@ -6,31 +6,17 @@
 //
 
 import Foundation
-import Cache
 import KeychainSwift
 import Combine
 
-class AuthService {
-    var perfil: Perfil?
+class CredentialsService {
+    private static let keychain = KeychainSwift()
     
-    let keychain = KeychainSwift()
-    let storage = try? Storage<String, Perfil>(
-        diskConfig: DiskConfig(name: "miutem.perfil", expiry: .seconds(604800), protectionType: .complete),
-        memoryConfig: MemoryConfig(expiry: .seconds(604800)),
-        transformer: TransformerFactory.forCodable(ofType: Perfil.self)
-    )
-    
-    var cancellables: [AnyCancellable] = []
-    
-    init() {
-        _ = hasCachedPerfil()
+    static func getStoredCredentials() -> Credentials {
+        Credentials(correo: keychain.get("correo") ?? "", contrasenia: keychain.get("contrasenia") ?? "")
     }
     
-    func getStoredCredentials() -> Credentials {
-        Credentials(correo: keychain.get("correo") ?? "", contrasenia: keychain.get("password") ?? "")
-    }
-    
-    func storeCredentials(credentials: Credentials) {
+    static func storeCredentials(credentials: Credentials) {
         if(credentials.correo.isEmpty || credentials.contrasenia.isEmpty) {
             return
         }
@@ -40,83 +26,43 @@ class AuthService {
         keychain.set(credentials.contrasenia, forKey: "contrasenia")
     }
     
-    func hasCachedPerfil() -> Bool {
-        let cached = (try? storage?.existsObject(forKey: "perfil")) ?? false
-        if self.perfil == nil && cached {
-            // Run getPerfil to store it!
-            
-        }
-        
-        return cached
+    static func hasCredentials() -> Bool {
+        keychain.get("correo")?.isEmpty == false && keychain.get("contrasenia")?.isEmpty == false
     }
     
-    
-    func getPerfil() -> AnyPublisher<Perfil, ServerError> {
-        if self.perfil != nil {
-            return Just(self.perfil!)
-                .setFailureType(to: ServerError.self)
-                .eraseToAnyPublisher()
-        }
-        
-        try? storage?.removeExpiredObjects()
-        if let storedPerfil = try? storage?.object(forKey: "perfil") {
-            return Just(storedPerfil)
-                .setFailureType(to: ServerError.self)
-                .handleEvents(receiveOutput: { perfil in
-                    self.perfil = perfil
-                })
-                .eraseToAnyPublisher()
-        }
-        
-        guard let url = URL(string: "https://api.exdev.cl/v1/auth") else {
-            return Fail(error: .networkError)
-                .eraseToAnyPublisher()
-        }
-        
-        var request = URLRequest(url: url, timeoutInterval: 20.0)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            request.httpBody = try JSONEncoder().encode(self.getStoredCredentials())
-        } catch {
-            return Fail(error: .encodeError).eraseToAnyPublisher()
-        }
-        
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { data, response -> Data in
-                guard let httpResponse = response as? HTTPURLResponse else {
-                    throw ServerError.networkError
-                }
-                        
-                switch httpResponse.statusCode {
-                case 200:
-                    return data
-                default:
-                    if let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
-                        throw serverError
-                    } else {
-                        throw ServerError.unknownError
-                    }
-                }
-            }
-            .decode(type: Perfil.self, decoder: JSONDecoder())
-            .handleEvents(receiveOutput: { perfil in
-                try? self.storage?.setObject(perfil, forKey: "perfil")
-            })
-            .mapError { error in
-                if let serverError = error as? ServerError {
-                    return serverError
-                } else {
-                    return .unknownError
-                }
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    func logout() {
+    static func logout() {
         keychain.delete("correo")
         keychain.delete("contrasenia")
-        try? storage?.removeAll()
+    }
+}
+
+class AuthService {
+    
+    static func hasCachedPerfil() -> Bool {
+        return (try? GlobalStorage.shared?.existsObject(forKey: "perfil")) ?? false
+    }
+    
+    static func getPerfil() async throws -> Perfil {
+        try? GlobalStorage.shared?.removeExpiredObjects()
+        if let perfil = try? GlobalStorage.shared?.transformCodable(ofType: Perfil.self).object(forKey: "perfil") {
+            return perfil
+        }
+        
+        let (data, _, _) = try await HTTPRequest(method: .post, uri: "https://api.exdev.cl/v1/auth", body: .json(CredentialsService.getStoredCredentials())).perform()
+        
+        if data == nil {
+            throw ServerError.networkError
+        }
+        
+
+        let perfil = try JsonService.fromJson(Perfil.self, data!)
+        try? GlobalStorage.shared?.transformCodable(ofType: Perfil.self).setObject(perfil, forKey: "perfil")
+        return perfil
+    }
+
+    
+    static func clearCache() {
+        try? GlobalStorage.shared?.removeExpiredObjects()
+        try? GlobalStorage.shared?.removeObject(forKey: "perfil")
     }
 }

@@ -15,26 +15,25 @@ class JsonService {
         return decoder
     }()
     
-    static func fromJson<T: Decodable>(_ type: T.Type, _ json: Any) -> T? {
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
-            let object = try sharedDecoder.decode(type, from: jsonData)
-            return object
-        } catch {
-            print("Error decoding JSON: \(error.localizedDescription)")
-            return nil
-        }
+    static let sharedEncoder: JSONEncoder = {
+        let encoder = JSONEncoder()
+        // Configure encoder if needed
+        return encoder
+    }()
+    
+    static func toJson<T: Encodable>(_ value: T) throws -> Data {
+        return try sharedEncoder.encode(value)
     }
     
-    static func fromJsonArray<T: Decodable>(_ type: [T].Type, _ jsonArray: Any) -> [T]? {
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: jsonArray, options: [])
-            let objects = try sharedDecoder.decode(type, from: jsonData)
-            return objects
-        } catch {
-            print("Error decoding JSON array: \(error.localizedDescription)")
-            print(error)
-            return nil
-        }
+    static func toJsonArray<T: Encodable>(_ values: [T]) throws -> Data {
+        return try sharedEncoder.encode(values)
+    }
+    
+    static func fromJson<T: Decodable>(_ type: T.Type, _ data: Data) throws -> T {
+        return try sharedDecoder.decode(type, from: data)
+    }
+    
+    static func fromJsonArray<T: Decodable>(_ type: [T].Type, _ data: Data) throws -> [T] {
+        return try sharedDecoder.decode(type, from: data)
     }
 }

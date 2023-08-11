@@ -5,11 +5,7 @@
 //  Created by Francisco Solis Maturana on 21-06-23.
 //
 
-import Cache
 import Foundation
-import Just
-import KeychainSwift
-import SwiftSoup
 
 struct Credentials: Codable {
     var correo: String
