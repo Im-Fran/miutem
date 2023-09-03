@@ -48,7 +48,11 @@ class AuthService {
             return perfil
         }
         
-        let (data, _, _) = try await HTTPRequest(method: .post, uri: "https://api.exdev.cl/v1/auth", body: .json(CredentialsService.getStoredCredentials())).perform()
+        let (data, _, error) = try await HTTPRequest(method: .post, uri: "https://api.exdev.cl/v1/auth", body: .json(CredentialsService.getStoredCredentials())).perform()
+        
+        if error != nil {
+            throw error as! ServerError
+        }
         
         if data == nil {
             throw ServerError.networkError

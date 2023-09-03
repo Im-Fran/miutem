@@ -12,10 +12,8 @@ struct LoginView: View {
     @Binding var isLoggedIn: Bool
     
     @State private var correo: String = ""
-    @FocusState private var isCorreoFocused: Bool
     
     @State private var contrasenia: String = ""
-    @FocusState private var isContraseniaFocused: Bool
     
     @State private var isShowingLoadingIndicator: Bool = false
     
@@ -45,7 +43,6 @@ struct LoginView: View {
                                  Text("Usuario/Correo UTEM")
                                      .foregroundColor(.white)
                              }
-                             .focused($isCorreoFocused)
                              .textInputAutocapitalization(.never)
                          }
                          .padding()
@@ -60,7 +57,6 @@ struct LoginView: View {
                                      .foregroundColor(.white)
                              }
                              .textInputAutocapitalization(.never)
-                             .focused($isContraseniaFocused)
                          }
                          .padding()
                          .background(Capsule().stroke(.white, lineWidth: 2)) // Apply oval shape
@@ -72,14 +68,6 @@ struct LoginView: View {
 
                      Button("Iniciar") {
                          isShowingLoadingIndicator = true // Show loading indicator when button is tapped
-
-                         if isCorreoFocused {
-                             isCorreoFocused.toggle()
-                         }
-
-                         if isContraseniaFocused {
-                             isContraseniaFocused.toggle()
-                         }
 
                          if contrasenia.isEmpty {
                              showError(error: "Ingresa una contraseña válida!")
@@ -125,6 +113,9 @@ struct LoginView: View {
                      .multilineTextAlignment(.center)
                      .lineLimit(2)
                      .foregroundColor(.white)
+             }
+             .onTapGesture {
+                 UIApplication.shared.inputView?.endEditing(true)
              }
         }
         .systemNotification(notificationContext)

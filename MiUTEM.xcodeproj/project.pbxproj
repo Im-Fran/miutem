@@ -17,6 +17,7 @@
 		A12D87672A43B36800A0D1A2 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = A12D87662A43B36800A0D1A2 /* ActivityIndicatorView */; };
 		A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12D876A2A43B57C00A0D1A2 /* LoginView.swift */; };
 		A12D87742A43D99500A0D1A2 /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A12D87732A43D99500A0D1A2 /* background.mp4 */; };
+		A14EDC362A88316800E87894 /* AppLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14EDC352A88316800E87894 /* AppLayout.swift */; };
 		A158B71A2A7B408D00748C70 /* utem.riv in Resources */ = {isa = PBXBuildFile; fileRef = A158B7192A7B408D00748C70 /* utem.riv */; };
 		A158B71C2A7B442700748C70 /* Carrera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158B71B2A7B442700748C70 /* Carrera.swift */; };
 		A158B71E2A7B473D00748C70 /* CarreraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158B71D2A7B473D00748C70 /* CarreraService.swift */; };
@@ -29,6 +30,9 @@
 		A162F8582A427D9E0041DE2D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A162F8572A427D9E0041DE2D /* Preview Assets.xcassets */; };
 		A162F8602A4280B50041DE2D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A162F85F2A4280B50041DE2D /* HomeView.swift */; };
 		A162F86B2A4290580041DE2D /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A162F86A2A4290580041DE2D /* SplashView.swift */; };
+		A18094672AA5360F008F6CB1 /* PermisoDetail_Perfil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18094662AA5360F008F6CB1 /* PermisoDetail_Perfil.swift */; };
+		A18094692AA53633008F6CB1 /* PermisoDetail_Informacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18094682AA53633008F6CB1 /* PermisoDetail_Informacion.swift */; };
+		A180946B2AA53644008F6CB1 /* PermisoDetail_FechaYQR.swift in Sources */ = {isa = PBXBuildFile; fileRef = A180946A2AA53644008F6CB1 /* PermisoDetail_FechaYQR.swift */; };
 		A188D1082A4B23DC00A735F0 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A188D1072A4B23DC00A735F0 /* MenuView.swift */; };
 		A196980C2A44A28800D58F58 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A196980B2A44A28800D58F58 /* Helpers.swift */; };
 		A196980F2A44BEC200D58F58 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = A196980E2A44BEC200D58F58 /* PopupView */; };
@@ -58,12 +62,36 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A18094842AA53F09008F6CB1 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A180949C2AA5431A008F6CB1 /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		A1189FA22A7E7EC900B9A3C1 /* PermisoServiceUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermisoServiceUnitTest.swift; sourceTree = "<group>"; };
 		A1189FA42A7E93D200B9A3C1 /* PermisosResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PermisosResponse.json; sourceTree = "<group>"; };
 		A1189FA62A7E940400B9A3C1 /* PermisoResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PermisoResponse.json; sourceTree = "<group>"; };
 		A12D876A2A43B57C00A0D1A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A12D87732A43D99500A0D1A2 /* background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.mp4; sourceTree = "<group>"; };
+		A14EDC352A88316800E87894 /* AppLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayout.swift; sourceTree = "<group>"; };
 		A158B7192A7B408D00748C70 /* utem.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = utem.riv; path = "../../../../../../Users/fran/Downloads/Rive Files/utem.riv"; sourceTree = "<group>"; };
 		A158B71B2A7B442700748C70 /* Carrera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrera.swift; sourceTree = "<group>"; };
 		A158B71D2A7B473D00748C70 /* CarreraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarreraService.swift; sourceTree = "<group>"; };
@@ -77,6 +105,11 @@
 		A162F8572A427D9E0041DE2D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A162F85F2A4280B50041DE2D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A162F86A2A4290580041DE2D /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		A18094662AA5360F008F6CB1 /* PermisoDetail_Perfil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermisoDetail_Perfil.swift; sourceTree = "<group>"; };
+		A18094682AA53633008F6CB1 /* PermisoDetail_Informacion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermisoDetail_Informacion.swift; sourceTree = "<group>"; };
+		A180946A2AA53644008F6CB1 /* PermisoDetail_FechaYQR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermisoDetail_FechaYQR.swift; sourceTree = "<group>"; };
+		A18094722AA53F03008F6CB1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		A18094742AA53F03008F6CB1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		A188D1072A4B23DC00A735F0 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		A196980B2A44A28800D58F58 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		A198014B2A7DF1DB00E73297 /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
@@ -167,6 +200,7 @@
 		A15A7C932A49427C004004F5 /* Permisos */ = {
 			isa = PBXGroup;
 			children = (
+				A18094652AA535FB008F6CB1 /* PermisoDetail */,
 				A15A7C962A494299004004F5 /* PermisoPreview.swift */,
 				A1F722D62A4A737E00E30CF9 /* PermisoDetail.swift */,
 			);
@@ -178,6 +212,7 @@
 			children = (
 				A162F84F2A427D9D0041DE2D /* MiUTEM */,
 				A1A1F4482A7BEC7900849EC4 /* MiUTEMUnitTests */,
+				A18094712AA53F03008F6CB1 /* Frameworks */,
 				A162F84E2A427D9D0041DE2D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -225,10 +260,30 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		A18094652AA535FB008F6CB1 /* PermisoDetail */ = {
+			isa = PBXGroup;
+			children = (
+				A18094662AA5360F008F6CB1 /* PermisoDetail_Perfil.swift */,
+				A18094682AA53633008F6CB1 /* PermisoDetail_Informacion.swift */,
+				A180946A2AA53644008F6CB1 /* PermisoDetail_FechaYQR.swift */,
+			);
+			path = PermisoDetail;
+			sourceTree = "<group>";
+		};
+		A18094712AA53F03008F6CB1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A18094722AA53F03008F6CB1 /* WidgetKit.framework */,
+				A18094742AA53F03008F6CB1 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A188D1062A4B23D000A735F0 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
 				A188D1072A4B23DC00A735F0 /* MenuView.swift */,
+				A14EDC352A88316800E87894 /* AppLayout.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -313,6 +368,8 @@
 				A162F8492A427D9D0041DE2D /* Sources */,
 				A162F84A2A427D9D0041DE2D /* Frameworks */,
 				A162F84B2A427D9D0041DE2D /* Resources */,
+				A18094842AA53F09008F6CB1 /* Embed Foundation Extensions */,
+				A180949C2AA5431A008F6CB1 /* Embed App Clips */,
 			);
 			buildRules = (
 			);
@@ -437,14 +494,18 @@
 				A1DC1B7F2A435A7000AFF8E1 /* User.swift in Sources */,
 				A188D1082A4B23DC00A735F0 /* MenuView.swift in Sources */,
 				A196980C2A44A28800D58F58 /* Helpers.swift in Sources */,
+				A180946B2AA53644008F6CB1 /* PermisoDetail_FechaYQR.swift in Sources */,
 				A162F8602A4280B50041DE2D /* HomeView.swift in Sources */,
 				A1F722D22A4A46E000E30CF9 /* AuthService.swift in Sources */,
 				A158B7252A7B546700748C70 /* JsonService.swift in Sources */,
+				A18094692AA53633008F6CB1 /* PermisoDetail_Informacion.swift in Sources */,
 				A1F722D72A4A737E00E30CF9 /* PermisoDetail.swift in Sources */,
 				A162F86B2A4290580041DE2D /* SplashView.swift in Sources */,
+				A14EDC362A88316800E87894 /* AppLayout.swift in Sources */,
 				A15A7C972A494299004004F5 /* PermisoPreview.swift in Sources */,
 				A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */,
 				A162F8512A427D9D0041DE2D /* MiUTEMApp.swift in Sources */,
+				A18094672AA5360F008F6CB1 /* PermisoDetail_Perfil.swift in Sources */,
 				A15A7C992A494444004004F5 /* Permiso.swift in Sources */,
 				A1F722DD2A4A86B300E30CF9 /* QRGeneratorService.swift in Sources */,
 				A158B71E2A7B473D00748C70 /* CarreraService.swift in Sources */,
@@ -596,6 +657,7 @@
 		A162F85C2A427D9E0041DE2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MiUTEM/MiUTEM.entitlements;
@@ -627,6 +689,7 @@
 		A162F85D2A427D9E0041DE2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MiUTEM/MiUTEM.entitlements;

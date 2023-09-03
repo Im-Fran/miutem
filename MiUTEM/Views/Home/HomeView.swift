@@ -17,74 +17,40 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
-                Rectangle()
-                    .fill(LinearGradient(colors: [.utemAzul, .utemVerde], startPoint: .bottomLeading, endPoint: .topTrailing ))
-                    .frame(width: UIScreen.main.bounds.width, height: 125)
-                    .ignoresSafeArea()
-                    .position(x: UIScreen.main.bounds.width/2, y: 0)
-                    .zIndex(0)
-                
-                VStack {
-                    HStack {
-                        VStack(alignment: .leading){
-                            Text("Tiempo sin vernos,")
+            VStack {
+                HStack {
+                    VStack(alignment: .leading){
+                        Text("Tiempo sin vernos,")
+                            .foregroundColor(.black)
+                            .font(.title)
+                        if isLoading {
+                            Text("Usuario")
                                 .foregroundColor(.black)
                                 .font(.title)
-                            if isLoading {
-                                Text("Usuario")
-                                    .foregroundColor(.black)
-                                    .font(.title)
-                                    .redacted(reason: .placeholder)
-                                    .shimmering()
-                            } else {
-                                Text(perfil?.primerNombre ?? "")
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.black)
-                                    .font(.title)
-                            }
-                        }
-                        Spacer()
-                    }
-                    Spacer().frame(height: 50)
-                    VStack {
-                        HStack {
-                            Text("PERMISOS ACTIVOS")
-                                .foregroundColor(.black)
+                                .redacted(reason: .placeholder)
+                                .shimmering()
+                        } else {
+                            Text(perfil?.primerNombre ?? "")
                                 .fontWeight(.semibold)
-                            Spacer()
+                                .foregroundColor(.black)
+                                .font(.title)
                         }
-                        
-                        PermisoPreview()
                     }
-                    
                     Spacer()
                 }
-                .padding()
-                
-                
-                MenuView(isMenuVisible: $isMenuVisible)
-                    .ignoresSafeArea()
-                    .zIndex(1)
-            }
-            .background(.lightGrey)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        self.isMenuVisible.toggle()
-                    }) {
-                        Image(systemName: "line.3.horizontal")
-                            .font(.title3)
-                            .foregroundColor(.white)
+                Spacer().frame(height: 50)
+                VStack {
+                    HStack {
+                        Text("PERMISOS ACTIVOS")
+                            .foregroundColor(.black)
+                            .fontWeight(.semibold)
+                        Spacer()
                     }
+                    
+                    PermisoPreview()
                 }
                 
-                ToolbarItem(placement: .principal) {
-                    Text("Inicio")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                }
+                Spacer()
             }
             .gesture(DragGesture(minimumDistance: 5)
                 .onEnded {
@@ -103,7 +69,6 @@ struct HomeView: View {
                     }
                 }
             )
-            
             .onAppear {
                 if isLoading {
                     Task {
@@ -118,6 +83,31 @@ struct HomeView: View {
                     }
                 }
             }
+            .padding()
+            .background(.lightGrey, ignoresSafeAreaEdges: .bottom)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        // self.isMenuVisible.toggle()
+                    }) {
+                        Image(systemName: "line.3.horizontal")
+                            .font(.title3)
+                            .foregroundColor(.white)
+                    }
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Text("Inicio")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+            }
+            .background(LinearGradient(
+                gradient: Gradient(colors: [Color.utemAzul, Color.utemVerde]),
+                startPoint: .leading,
+                endPoint: .trailing
+            ), ignoresSafeAreaEdges: [.horizontal, .top])
         }
     }
 }
