@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Photos
 
 struct PermisoDetail_FechaYQR: View {
     
@@ -27,6 +28,33 @@ struct PermisoDetail_FechaYQR: View {
                     .resizable()
                     .frame(width: 128, height: 128)
                     .padding(.vertical, 15)
+                    .contextMenu {
+                        Button(action: {
+                            let saveImage = {
+                                UIImageWriteToSavedPhotosAlbum(qrImage!, nil, nil, nil)
+                            }
+                            
+                            let readWriteStatus = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+                            if readWriteStatus == .authorized {
+                                saveImage()
+                            } else if readWriteStatus == .notDetermined {
+                                PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                                    if status == .authorized {
+                                        saveImage()
+                                    }
+                                }
+                            } else {
+                                // Show error.
+                            }
+                        }) {
+                            Label("Guardar en Fotos", systemImage: "square.and.arrow.down")
+                        }
+                    } preview: {
+                        Image(uiImage: qrImage!)
+                            .resizable()
+                            .frame(width: 256, height: 256)
+                            .padding(.vertical, 15)
+                    }
             }
             
             Text("Permiso generado el:")

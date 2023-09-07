@@ -21,4 +21,5 @@ struct ServerError: Error, Codable {
     static let decodeError = ServerError(mensaje: "Error al decodificar datos! Por favor intenta más tarde")
     static let encodeError = ServerError(mensaje: "Error al codificar datos! Por favor intenta más tarde")
     static let unknownError = ServerError(mensaje: "Error desconocido! Por favor intenta más tarde")
+    static let notFoundError = ServerError(mensaje: "No se ha podido encontrar lo que buscabas!")
 }

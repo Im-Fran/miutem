@@ -17,7 +17,6 @@
 		A12D87672A43B36800A0D1A2 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = A12D87662A43B36800A0D1A2 /* ActivityIndicatorView */; };
 		A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12D876A2A43B57C00A0D1A2 /* LoginView.swift */; };
 		A12D87742A43D99500A0D1A2 /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A12D87732A43D99500A0D1A2 /* background.mp4 */; };
-		A14EDC362A88316800E87894 /* AppLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14EDC352A88316800E87894 /* AppLayout.swift */; };
 		A158B71A2A7B408D00748C70 /* utem.riv in Resources */ = {isa = PBXBuildFile; fileRef = A158B7192A7B408D00748C70 /* utem.riv */; };
 		A158B71C2A7B442700748C70 /* Carrera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158B71B2A7B442700748C70 /* Carrera.swift */; };
 		A158B71E2A7B473D00748C70 /* CarreraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158B71D2A7B473D00748C70 /* CarreraService.swift */; };
@@ -91,7 +90,6 @@
 		A1189FA62A7E940400B9A3C1 /* PermisoResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PermisoResponse.json; sourceTree = "<group>"; };
 		A12D876A2A43B57C00A0D1A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A12D87732A43D99500A0D1A2 /* background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.mp4; sourceTree = "<group>"; };
-		A14EDC352A88316800E87894 /* AppLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLayout.swift; sourceTree = "<group>"; };
 		A158B7192A7B408D00748C70 /* utem.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = utem.riv; path = "../../../../../../Users/fran/Downloads/Rive Files/utem.riv"; sourceTree = "<group>"; };
 		A158B71B2A7B442700748C70 /* Carrera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrera.swift; sourceTree = "<group>"; };
 		A158B71D2A7B473D00748C70 /* CarreraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarreraService.swift; sourceTree = "<group>"; };
@@ -118,6 +116,7 @@
 		A1A1F4512A7BEC9B00849EC4 /* AuthServiceUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServiceUnitTest.swift; sourceTree = "<group>"; };
 		A1A1F4572A7C365300849EC4 /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
 		A1A1F45B2A7C36D000849EC4 /* AuthResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AuthResponse.json; sourceTree = "<group>"; };
+		A1B40B872AA969B300D635A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A1C735C82A85E1DF0008E03A /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		A1DC1B7E2A435A7000AFF8E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1F722D12A4A46E000E30CF9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -229,6 +228,7 @@
 		A162F84F2A427D9D0041DE2D /* MiUTEM */ = {
 			isa = PBXGroup;
 			children = (
+				A1B40B872AA969B300D635A8 /* Info.plist */,
 				A158B7182A7B407500748C70 /* Rive Files */,
 				A1F722DE2A4A9A0200E30CF9 /* MiUTEM.entitlements */,
 				A12D876E2A43D53900A0D1A2 /* Raw Assets */,
@@ -283,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				A188D1072A4B23DC00A735F0 /* MenuView.swift */,
-				A14EDC352A88316800E87894 /* AppLayout.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -501,7 +500,6 @@
 				A18094692AA53633008F6CB1 /* PermisoDetail_Informacion.swift in Sources */,
 				A1F722D72A4A737E00E30CF9 /* PermisoDetail.swift in Sources */,
 				A162F86B2A4290580041DE2D /* SplashView.swift in Sources */,
-				A14EDC362A88316800E87894 /* AppLayout.swift in Sources */,
 				A15A7C972A494299004004F5 /* PermisoPreview.swift in Sources */,
 				A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */,
 				A162F8512A427D9D0041DE2D /* MiUTEMApp.swift in Sources */,
@@ -667,12 +665,17 @@
 				DEVELOPMENT_TEAM = 376N27T2BP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MiUTEM/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "La app guardará tu QR de ingreso si deseas hacerlo.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "La app guardará tu QR de ingreso si deseas hacerlo.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -699,12 +702,17 @@
 				DEVELOPMENT_TEAM = 376N27T2BP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MiUTEM/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "La app guardará tu QR de ingreso si deseas hacerlo.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "La app guardará tu QR de ingreso si deseas hacerlo.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
