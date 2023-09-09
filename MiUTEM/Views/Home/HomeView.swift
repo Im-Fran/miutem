@@ -12,32 +12,22 @@ import Combine
 struct HomeView: View {
     @State var perfil: Perfil?
     
-    @State var isMenuVisible: Bool = false
+    @State var isSidebarVisible: Bool = false
     @State var isLoading = true
     
     var body: some View {
+        ZStack {
+            content
+            
+            MenuView(isSidebarVisible: $isSidebarVisible, perfil: $perfil)
+        }
+    }
+    
+    var content: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    VStack(alignment: .leading){
-                        Text("Tiempo sin vernos,")
-                            .foregroundColor(.black)
-                            .font(.title)
-                        if isLoading {
-                            Text("Usuario")
-                                .foregroundColor(.black)
-                                .font(.title)
-                                .redacted(reason: .placeholder)
-                                .shimmering()
-                        } else {
-                            Text(perfil?.primerNombre ?? "")
-                                .fontWeight(.semibold)
-                                .foregroundColor(.black)
-                                .font(.title)
-                        }
-                    }
-                    Spacer()
-                }
+                saludo
+                
                 Spacer().frame(height: 50)
                 VStack {
                     HStack {
@@ -55,15 +45,15 @@ struct HomeView: View {
             .gesture(DragGesture(minimumDistance: 5)
                 .onEnded {
                     if (($0.location.x - $0.startLocation.x) > 0) {
-                        if (!self.isMenuVisible) {
+                        if (!self.isSidebarVisible) {
                             withAnimation {
-                                self.isMenuVisible.toggle()
+                                self.isSidebarVisible.toggle()
                             }
                         }
                     } else {
-                        if ($0.translation.width < -100 && self.isMenuVisible) {
+                        if ($0.translation.width < -100 && self.isSidebarVisible) {
                             withAnimation {
-                                self.isMenuVisible.toggle()
+                                self.isSidebarVisible.toggle()
                             }
                         }
                     }
@@ -88,7 +78,7 @@ struct HomeView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        // self.isMenuVisible.toggle()
+                        self.isSidebarVisible.toggle()
                     }) {
                         Image(systemName: "line.3.horizontal")
                             .font(.title3)
@@ -108,6 +98,29 @@ struct HomeView: View {
                 startPoint: .leading,
                 endPoint: .trailing
             ), ignoresSafeAreaEdges: [.horizontal, .top])
+        }
+    }
+    
+    var saludo: some View {
+        HStack {
+            VStack(alignment: .leading){
+                Text("Tiempo sin vernos,")
+                    .foregroundColor(.black)
+                    .font(.title)
+                if isLoading {
+                    Text("Usuario")
+                        .foregroundColor(.black)
+                        .font(.title)
+                        .redacted(reason: .placeholder)
+                        .shimmering()
+                } else {
+                    Text(perfil?.primerNombre ?? "")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.black)
+                        .font(.title)
+                }
+            }
+            Spacer()
         }
     }
 }

@@ -18,6 +18,8 @@ extension ShapeStyle where Self == Color {
     public static var utemAzul: Color { get { return Color(hex: 0xFF06607A) } }
     public static var utemVerde: Color { get { return Color(hex: 0xFF1D8E5C) } }
     
+    public static var brandGrey: Color { get { return Color(hex: 0xFF898989) } }
+    
     public static var darkGrey: Color { get { return Color(hex: 0xFF363636) } }
     public static var grey: Color { get { return Color(hex: 0xFF7F7F7F) } }
     public static var mediumGrey: Color { get { return Color(hex: 0xFFBDBDBD) } }

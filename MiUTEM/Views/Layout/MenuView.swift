@@ -6,93 +6,212 @@
 //
 
 import SwiftUI
-import Combine
 
 struct MenuView: View {
     
-    @Binding var isMenuVisible: Bool
+    @Binding var isSidebarVisible: Bool
+    @Binding var perfil: Perfil?
     
-    @State var perfil: Perfil?
+    var sideBarWidth = UIScreen.main.bounds.size.width * 0.8
     
     var body: some View {
         ZStack {
             GeometryReader { _ in
                 EmptyView()
             }
-            .background(.black.opacity(0.3))
-            .opacity(isMenuVisible ? 1 : 0)
-            .animation(.easeIn.delay(0.25), value: isMenuVisible)
+            .background(.black.opacity(0.6))
+            .opacity(isSidebarVisible ? 1 : 0)
+            .animation(.easeInOut.delay(0.2), value: isSidebarVisible)
             .onTapGesture {
-                self.isMenuVisible.toggle()
+                isSidebarVisible.toggle()
             }
-
             
-             if isMenuVisible && perfil != nil {
-                 HStack {
-                     VStack(alignment: .leading) {
-                         Rectangle()
-                             .fill(LinearGradient(
-                                 colors: [.utemAzul, .utemVerde],
-                                 startPoint: .bottomLeading,
-                                 endPoint: .topTrailing
-                             ))
-                             .overlay {
-                                 VStack(alignment: .leading) {
-                                     Circle()
-                                         .fill(.brand)
-                                         .frame(width: 75, height: 75)
-                                         .overlay {
-                                             Text(perfil?.iniciales ?? "")
-                                                 .foregroundColor(.white)
-                                         }
-                                     
-                                     Text(perfil?.nombres.capitalized ?? "")
-                                         .bold()
-                                         .foregroundColor(.white)
-                                     Text(perfil?.apellidos.capitalized ?? "")
-                                         .bold()
-                                         .foregroundColor(.white)
-                                     Text(verbatim: perfil?.correoUtem ?? "")
-                                         .foregroundColor(.white)
-                                 }
-                                 .padding(.top, 50)
-                                 .padding()
-                             }
-                             .frame(maxHeight: 200)
-                             .ignoresSafeArea()
-                         
-                         Divider()
-                         
-                         VStack {
-                             Text("Hello, World")
-                         }
-                         .padding()
-                         
-                         Spacer()
-                     }
-                     .frame(width: UIScreen.main.bounds.width / 1.5)
-                     .background(.white)
-                     
-                     Spacer()
-                 }
-             }
+            content
         }
-        .animation(.default, value: isMenuVisible)
-        .onAppear {
-            Task {
-                let perfil = try? await AuthService.getPerfil()
-                self.perfil = perfil
+        .edgesIgnoringSafeArea(.all)
+    }
+    
+    var content: some View {
+        HStack(alignment: .top) {
+            ZStack(alignment: .top){
+                Color.white
+                VStack(alignment: .leading){
+                    userProfile
+                    menuLinks
+                        .padding(20)
+                    Spacer()
+                    
+                    VStack(alignment: .leading, spacing: 10){
+                        Divider()
+                        VStack(alignment: .leading, spacing: 20){
+                            Button(action: {}) {
+                                Label {
+                                    Text(verbatim: "Acerca de MiUTEM")
+                                        .foregroundColor(.black)
+                                        .font(.system(size: 20))
+                                        .padding(.leading, 20)
+                                } icon: {
+                                    Image(systemName: "heart.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(.brandGrey)
+                                }
+                            }
+                            
+                            
+                            Button(action: {
+                                CredentialsService.logout()
+                                AuthService.clearCache()
+                            }) {
+                                Button(action: {}) {
+                                    Label {
+                                        Text(verbatim: "Cerrar Sesión")
+                                            .foregroundColor(.black)
+                                            .font(.system(size: 20))
+                                            .padding(.leading, 20)
+                                    } icon: {
+                                        Image(systemName: "multiply.circle.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 20, height: 20)
+                                            .foregroundColor(.brandGrey)
+                                    }
+                                }
+                            }
+                        }
+                        .padding(20)
+                    }
+                    .padding(.bottom, 30)
+                }
+                
+                Spacer()
             }
+            .frame(width: sideBarWidth)
+            .offset(x: isSidebarVisible ? 0 : -sideBarWidth)
+            .animation(.default, value: isSidebarVisible)
+            
+            Spacer()
         }
     }
-}
-
-
-struct MenuView_Previews: PreviewProvider {
-    @State private static var isMenuVisible: Bool = true
     
-    static var previews: some View {
-        MenuView(isMenuVisible: $isMenuVisible)
-            .ignoresSafeArea()
+    var userProfile: some View {
+        Rectangle()
+            .fill(LinearGradient(
+                gradient: Gradient(colors: [Color.utemAzul, Color.utemVerde]),
+                startPoint: .leading,
+                endPoint: .trailing
+            ))
+            .frame(width: sideBarWidth, height: 225)
+            .overlay {
+                HStack(alignment: .top){
+                    VStack(alignment: .leading){
+                        Circle()
+                            .fill(Color(hex: 0xFF1A9C9A))
+                            .frame(width: 75, height: 75)
+                            .overlay {
+                                Text(perfil?.iniciales ?? "N/N")
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .foregroundColor(.white)
+                            }
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .leading) {
+                            Text(perfil?.nombreCompleto ?? "N/M")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20, weight: .semibold))
+                            Text(verbatim: perfil?.correoUtem ?? "nn@utem.cl")
+                                .foregroundColor(.lightGrey)
+                                .font(.system(size: 18, weight: .light))
+                        }
+                    }
+                    .padding(.top, 50)
+                    .padding(.horizontal, 10)
+                    .padding(.bottom, 20)
+                    
+                    Spacer()
+                }
+            }
+    }
+    
+    var menuLinks: some View {
+        VStack(alignment: .leading, spacing: 20){
+            Button(action: {}) {
+                Label {
+                    Text(verbatim: "Perfil")
+                        .foregroundColor(.black)
+                        .font(.system(size: 20))
+                        .padding(.leading, 20)
+                } icon: {
+                    Image(systemName: "person.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.brandGrey)
+                }
+            }
+            
+            
+            Button(action: {}) {
+                Label {
+                    Text(verbatim: "Asignaturas")
+                        .foregroundColor(.black)
+                        .font(.system(size: 20))
+                        .padding(.leading, 20)
+                } icon: {
+                    Image(systemName: "text.book.closed.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.brandGrey)
+                }
+            }
+            
+            
+            Button(action: {}) {
+                Label {
+                    Text(verbatim: "Horario")
+                        .foregroundColor(.black)
+                        .font(.system(size: 20))
+                        .padding(.leading, 20)
+                } icon: {
+                    Image(systemName: "clock.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.brandGrey)
+                }
+            }
+            
+            
+            Button(action: {}) {
+                Label {
+                    HStack {
+                        Text(verbatim: "Credencial")
+                            .foregroundColor(.black)
+                            .font(.system(size: 20))
+                            .padding(.leading, 20)
+                        
+                        Spacer()
+                        
+                        Rectangle()
+                            .fill(Color.red)
+                            .cornerRadius(20)
+                            .overlay {
+                                Text(verbatim: "Nuevo")
+                                    .foregroundColor(.white)
+                            }
+                            .frame(width: 65, height: 25)
+                    }
+                } icon: {
+                    Image(systemName: "person.text.rectangle.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.brandGrey)
+                }
+            }
+        }
     }
 }
