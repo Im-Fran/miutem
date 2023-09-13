@@ -10,6 +10,8 @@ import KeychainSwift
 import Combine
 
 class CredentialsService {
+    private static var onLogout = {}
+    
     private static let keychain = KeychainSwift()
     
     static func getStoredCredentials() -> Credentials {
@@ -38,9 +40,17 @@ class CredentialsService {
         return keychain.get("correo")?.isEmpty == false && keychain.get("contrasenia")?.isEmpty == false
     }
     
+    static func setOnLogout(onLogout: @escaping () -> ()) {
+        CredentialsService.onLogout = onLogout
+    }
+    
     static func logout() {
+        AuthService.clearCache()
+        
         keychain.delete("correo")
         keychain.delete("contrasenia")
+        
+        CredentialsService.onLogout()
     }
 }
 

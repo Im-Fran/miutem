@@ -43,12 +43,12 @@ struct MenuView: View {
                     
                     VStack(alignment: .leading, spacing: 10){
                         Divider()
-                        VStack(alignment: .leading, spacing: 20){
+                        VStack(alignment: .leading, spacing: 40){
                             Button(action: {}) {
                                 Label {
                                     Text(verbatim: "Acerca de MiUTEM")
                                         .foregroundColor(.black)
-                                        .font(.system(size: 20))
+                                        .font(.system(size: 18))
                                         .padding(.leading, 20)
                                 } icon: {
                                     Image(systemName: "heart.fill")
@@ -60,15 +60,12 @@ struct MenuView: View {
                             }
                             
                             
-                            Button(action: {
-                                CredentialsService.logout()
-                                AuthService.clearCache()
-                            }) {
+                            Button(action: { CredentialsService.logout() }) {
                                 Button(action: {}) {
                                     Label {
                                         Text(verbatim: "Cerrar Sesión")
                                             .foregroundColor(.black)
-                                            .font(.system(size: 20))
+                                            .font(.system(size: 18))
                                             .padding(.leading, 20)
                                     } icon: {
                                         Image(systemName: "multiply.circle.fill")
@@ -102,31 +99,31 @@ struct MenuView: View {
                 startPoint: .leading,
                 endPoint: .trailing
             ))
-            .frame(width: sideBarWidth, height: 225)
+            .frame(width: sideBarWidth, height: 200)
             .overlay {
                 HStack(alignment: .top){
                     VStack(alignment: .leading){
                         Circle()
                             .fill(Color(hex: 0xFF1A9C9A))
-                            .frame(width: 75, height: 75)
+                            .frame(width: 70, height: 70)
                             .overlay {
                                 Text(perfil?.iniciales ?? "N/N")
-                                    .font(.system(size: 20, weight: .semibold))
+                                    .font(.system(size: 18, weight: .semibold))
                                     .foregroundColor(.white)
                             }
                         
                         Spacer()
                         
                         VStack(alignment: .leading) {
-                            Text(perfil?.nombreCompleto ?? "N/M")
+                            Text(perfil?.nombreCompleto.capitalized ?? "N/M")
                                 .foregroundColor(.white)
-                                .font(.system(size: 20, weight: .semibold))
+                                .font(.system(size: 15, weight: .semibold))
                             Text(verbatim: perfil?.correoUtem ?? "nn@utem.cl")
-                                .foregroundColor(.lightGrey)
-                                .font(.system(size: 18, weight: .light))
+                                .foregroundColor(.white)
+                                .font(.system(size: 14, weight: .light))
                         }
                     }
-                    .padding(.top, 50)
+                    .padding(.top, 60)
                     .padding(.horizontal, 10)
                     .padding(.bottom, 20)
                     
@@ -136,12 +133,12 @@ struct MenuView: View {
     }
     
     var menuLinks: some View {
-        VStack(alignment: .leading, spacing: 20){
+        VStack(alignment: .leading, spacing: 40){
             Button(action: {}) {
                 Label {
                     Text(verbatim: "Perfil")
                         .foregroundColor(.black)
-                        .font(.system(size: 20))
+                        .font(.system(size: 18))
                         .padding(.leading, 20)
                 } icon: {
                     Image(systemName: "person.fill")
@@ -157,7 +154,7 @@ struct MenuView: View {
                 Label {
                     Text(verbatim: "Asignaturas")
                         .foregroundColor(.black)
-                        .font(.system(size: 20))
+                        .font(.system(size: 18))
                         .padding(.leading, 20)
                 } icon: {
                     Image(systemName: "text.book.closed.fill")
@@ -173,7 +170,7 @@ struct MenuView: View {
                 Label {
                     Text(verbatim: "Horario")
                         .foregroundColor(.black)
-                        .font(.system(size: 20))
+                        .font(.system(size: 18))
                         .padding(.leading, 20)
                 } icon: {
                     Image(systemName: "clock.fill")
@@ -190,7 +187,7 @@ struct MenuView: View {
                     HStack {
                         Text(verbatim: "Credencial")
                             .foregroundColor(.black)
-                            .font(.system(size: 20))
+                            .font(.system(size: 18))
                             .padding(.leading, 20)
                         
                         Spacer()

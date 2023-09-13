@@ -41,6 +41,7 @@
 		A1A1F4582A7C365300849EC4 /* MockedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A1F4572A7C365300849EC4 /* MockedData.swift */; };
 		A1A1F45C2A7C36D000849EC4 /* AuthResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = A1A1F45B2A7C36D000849EC4 /* AuthResponse.json */; };
 		A1A1F45F2A7C3F3600849EC4 /* Mocker in Frameworks */ = {isa = PBXBuildFile; productRef = A1A1F45E2A7C3F3600849EC4 /* Mocker */; };
+		A1BDDA112AB2262A0036D09C /* ImagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1BDDA102AB2262A0036D09C /* ImagePreview.swift */; };
 		A1C735C92A85E1DF0008E03A /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C735C82A85E1DF0008E03A /* HTTPClient.swift */; };
 		A1DC1B7F2A435A7000AFF8E1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DC1B7E2A435A7000AFF8E1 /* User.swift */; };
 		A1F722BE2A4A05B000E30CF9 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = A1F722BD2A4A05B000E30CF9 /* SwiftSoup */; };
@@ -117,6 +118,7 @@
 		A1A1F4572A7C365300849EC4 /* MockedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockedData.swift; sourceTree = "<group>"; };
 		A1A1F45B2A7C36D000849EC4 /* AuthResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = AuthResponse.json; sourceTree = "<group>"; };
 		A1B40B872AA969B300D635A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A1BDDA102AB2262A0036D09C /* ImagePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreview.swift; sourceTree = "<group>"; };
 		A1C735C82A85E1DF0008E03A /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		A1DC1B7E2A435A7000AFF8E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A1F722D12A4A46E000E30CF9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -190,7 +192,6 @@
 		A15A7C922A494257004004F5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				A15A7C932A49427C004004F5 /* Permisos */,
 				A162F85F2A4280B50041DE2D /* HomeView.swift */,
 			);
 			path = Home;
@@ -252,6 +253,8 @@
 		A162F85E2A4280A20041DE2D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A15A7C932A49427C004004F5 /* Permisos */,
+				A1BDDA0F2AB2261E0036D09C /* Components */,
 				A188D1062A4B23D000A735F0 /* Layout */,
 				A15A7C922A494257004004F5 /* Home */,
 				A12D87692A43B56F00A0D1A2 /* Auth */,
@@ -323,6 +326,14 @@
 				A1189FA62A7E940400B9A3C1 /* PermisoResponse.json */,
 			);
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		A1BDDA0F2AB2261E0036D09C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A1BDDA102AB2262A0036D09C /* ImagePreview.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		A1DC1B7C2A435A5A00AFF8E1 /* Backend */ = {
@@ -500,6 +511,7 @@
 				A18094692AA53633008F6CB1 /* PermisoDetail_Informacion.swift in Sources */,
 				A1F722D72A4A737E00E30CF9 /* PermisoDetail.swift in Sources */,
 				A162F86B2A4290580041DE2D /* SplashView.swift in Sources */,
+				A1BDDA112AB2262A0036D09C /* ImagePreview.swift in Sources */,
 				A15A7C972A494299004004F5 /* PermisoPreview.swift in Sources */,
 				A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */,
 				A162F8512A427D9D0041DE2D /* MiUTEMApp.swift in Sources */,

@@ -29,6 +29,11 @@ struct MiUTEMApp: App {
                 LoginView(isLoggedIn: $isLoggedIn)
             } else {
                 HomeView()
+                    .onAppear {
+                        CredentialsService.setOnLogout {
+                            self.isLoggedIn.toggle()
+                        }
+                    }
             }
         }
     }
