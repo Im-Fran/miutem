@@ -17,6 +17,12 @@
 		A12D87672A43B36800A0D1A2 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = A12D87662A43B36800A0D1A2 /* ActivityIndicatorView */; };
 		A12D876B2A43B57C00A0D1A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12D876A2A43B57C00A0D1A2 /* LoginView.swift */; };
 		A12D87742A43D99500A0D1A2 /* background.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A12D87732A43D99500A0D1A2 /* background.mp4 */; };
+		A150F14F2AB3D2D800AEB7CE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18094722AA53F03008F6CB1 /* WidgetKit.framework */; };
+		A150F1502AB3D2D800AEB7CE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18094742AA53F03008F6CB1 /* SwiftUI.framework */; };
+		A150F1552AB3D2D800AEB7CE /* Permisos_QR.swift in Sources */ = {isa = PBXBuildFile; fileRef = A150F1542AB3D2D800AEB7CE /* Permisos_QR.swift */; };
+		A150F1582AB3D2DA00AEB7CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A150F1572AB3D2DA00AEB7CE /* Assets.xcassets */; };
+		A150F15E2AB3D2DA00AEB7CE /* Permisos QRExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A150F14E2AB3D2D800AEB7CE /* Permisos QRExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A150F1632AB3D4FC00AEB7CE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A150F1622AB3D4FC00AEB7CE /* Launch Screen.storyboard */; };
 		A158B71A2A7B408D00748C70 /* utem.riv in Resources */ = {isa = PBXBuildFile; fileRef = A158B7192A7B408D00748C70 /* utem.riv */; };
 		A158B71C2A7B442700748C70 /* Carrera.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158B71B2A7B442700748C70 /* Carrera.swift */; };
 		A158B71E2A7B473D00748C70 /* CarreraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A158B71D2A7B473D00748C70 /* CarreraService.swift */; };
@@ -53,6 +59,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A150F15C2AB3D2DA00AEB7CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A162F8452A427D9C0041DE2D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A150F14D2AB3D2D800AEB7CE;
+			remoteInfo = "Permisos QRExtension";
+		};
 		A1A1F44B2A7BEC7900849EC4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A162F8452A427D9C0041DE2D /* Project object */;
@@ -69,6 +82,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				A150F15E2AB3D2DA00AEB7CE /* Permisos QRExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +105,11 @@
 		A1189FA62A7E940400B9A3C1 /* PermisoResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PermisoResponse.json; sourceTree = "<group>"; };
 		A12D876A2A43B57C00A0D1A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		A12D87732A43D99500A0D1A2 /* background.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.mp4; sourceTree = "<group>"; };
+		A150F14E2AB3D2D800AEB7CE /* Permisos QRExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Permisos QRExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A150F1542AB3D2D800AEB7CE /* Permisos_QR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permisos_QR.swift; sourceTree = "<group>"; };
+		A150F1572AB3D2DA00AEB7CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A150F1592AB3D2DA00AEB7CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A150F1622AB3D4FC00AEB7CE /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A158B7192A7B408D00748C70 /* utem.riv */ = {isa = PBXFileReference; lastKnownFileType = file; name = utem.riv; path = "../../../../../../Users/fran/Downloads/Rive Files/utem.riv"; sourceTree = "<group>"; };
 		A158B71B2A7B442700748C70 /* Carrera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carrera.swift; sourceTree = "<group>"; };
 		A158B71D2A7B473D00748C70 /* CarreraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarreraService.swift; sourceTree = "<group>"; };
@@ -128,6 +147,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A150F14B2AB3D2D800AEB7CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A150F1502AB3D2D800AEB7CE /* SwiftUI.framework in Frameworks */,
+				A150F14F2AB3D2D800AEB7CE /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A162F84A2A427D9D0041DE2D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -171,6 +199,16 @@
 			path = "Raw Assets";
 			sourceTree = "<group>";
 		};
+		A150F1512AB3D2D800AEB7CE /* Permisos QR */ = {
+			isa = PBXGroup;
+			children = (
+				A150F1542AB3D2D800AEB7CE /* Permisos_QR.swift */,
+				A150F1572AB3D2DA00AEB7CE /* Assets.xcassets */,
+				A150F1592AB3D2DA00AEB7CE /* Info.plist */,
+			);
+			path = "Permisos QR";
+			sourceTree = "<group>";
+		};
 		A158B7182A7B407500748C70 /* Rive Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +250,7 @@
 			children = (
 				A162F84F2A427D9D0041DE2D /* MiUTEM */,
 				A1A1F4482A7BEC7900849EC4 /* MiUTEMUnitTests */,
+				A150F1512AB3D2D800AEB7CE /* Permisos QR */,
 				A18094712AA53F03008F6CB1 /* Frameworks */,
 				A162F84E2A427D9D0041DE2D /* Products */,
 			);
@@ -222,6 +261,7 @@
 			children = (
 				A162F84D2A427D9D0041DE2D /* MiUTEM.app */,
 				A1A1F4472A7BEC7900849EC4 /* MiUTEMUnitTests.xctest */,
+				A150F14E2AB3D2D800AEB7CE /* Permisos QRExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,6 +278,7 @@
 				A162F8502A427D9D0041DE2D /* MiUTEMApp.swift */,
 				A162F8542A427D9E0041DE2D /* Assets.xcassets */,
 				A162F8562A427D9E0041DE2D /* Preview Content */,
+				A150F1622AB3D4FC00AEB7CE /* Launch Screen.storyboard */,
 			);
 			path = MiUTEM;
 			sourceTree = "<group>";
@@ -371,6 +412,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A150F14D2AB3D2D800AEB7CE /* Permisos QRExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A150F1612AB3D2DA00AEB7CE /* Build configuration list for PBXNativeTarget "Permisos QRExtension" */;
+			buildPhases = (
+				A150F14A2AB3D2D800AEB7CE /* Sources */,
+				A150F14B2AB3D2D800AEB7CE /* Frameworks */,
+				A150F14C2AB3D2D800AEB7CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Permisos QRExtension";
+			productName = "Permisos QRExtension";
+			productReference = A150F14E2AB3D2D800AEB7CE /* Permisos QRExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		A162F84C2A427D9D0041DE2D /* MiUTEM */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A162F85B2A427D9E0041DE2D /* Build configuration list for PBXNativeTarget "MiUTEM" */;
@@ -384,6 +442,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A150F15D2AB3D2DA00AEB7CE /* PBXTargetDependency */,
 			);
 			name = MiUTEM;
 			packageProductDependencies = (
@@ -432,6 +491,9 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					A150F14D2AB3D2D800AEB7CE = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
 					A162F84C2A427D9D0041DE2D = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -443,10 +505,10 @@
 			};
 			buildConfigurationList = A162F8482A427D9C0041DE2D /* Build configuration list for PBXProject "MiUTEM" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "es-419";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				"es-419",
 				Base,
 			);
 			mainGroup = A162F8442A427D9C0041DE2D;
@@ -468,11 +530,20 @@
 			targets = (
 				A162F84C2A427D9D0041DE2D /* MiUTEM */,
 				A1A1F4462A7BEC7800849EC4 /* MiUTEMUnitTests */,
+				A150F14D2AB3D2D800AEB7CE /* Permisos QRExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A150F14C2AB3D2D800AEB7CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A150F1582AB3D2DA00AEB7CE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A162F84B2A427D9D0041DE2D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -480,6 +551,7 @@
 				A162F8582A427D9E0041DE2D /* Preview Assets.xcassets in Resources */,
 				A12D87742A43D99500A0D1A2 /* background.mp4 in Resources */,
 				A158B71A2A7B408D00748C70 /* utem.riv in Resources */,
+				A150F1632AB3D4FC00AEB7CE /* Launch Screen.storyboard in Resources */,
 				A162F8552A427D9E0041DE2D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,6 +569,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A150F14A2AB3D2D800AEB7CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A150F1552AB3D2D800AEB7CE /* Permisos_QR.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A162F8492A427D9D0041DE2D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -540,6 +620,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A150F15D2AB3D2DA00AEB7CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A150F14D2AB3D2D800AEB7CE /* Permisos QRExtension */;
+			targetProxy = A150F15C2AB3D2DA00AEB7CE /* PBXContainerItemProxy */;
+		};
 		A1A1F44C2A7BEC7900849EC4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A162F84C2A427D9D0041DE2D /* MiUTEM */;
@@ -548,6 +633,62 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		A150F15F2AB3D2DA00AEB7CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 376N27T2BP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Permisos QR/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Permisos QR";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "cl.franciscosolis.MiUTEM.Permisos-QR";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A150F1602AB3D2DA00AEB7CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 376N27T2BP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Permisos QR/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Permisos QR";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 3.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "cl.franciscosolis.MiUTEM.Permisos-QR";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A162F8592A427D9E0041DE2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -670,6 +811,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = MiUTEM/MiUTEM.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -684,6 +826,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -707,6 +850,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = MiUTEM/MiUTEM.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -721,6 +865,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -746,6 +891,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 376N27T2BP;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cl.franciscosolis.MiUTEMUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -764,6 +910,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 376N27T2BP;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = cl.franciscosolis.MiUTEMUnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -777,6 +924,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A150F1612AB3D2DA00AEB7CE /* Build configuration list for PBXNativeTarget "Permisos QRExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A150F15F2AB3D2DA00AEB7CE /* Debug */,
+				A150F1602AB3D2DA00AEB7CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A162F8482A427D9C0041DE2D /* Build configuration list for PBXProject "MiUTEM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
